@@ -1,0 +1,40 @@
+<div class="row" style="height: 95vh">
+  <div class="column centered-column centered-row" style="width: 50%; height: 100%" >
+    <img src="assets/logo.svg" alt="Ecoticket logo" width="350" height="350">
+  </div>
+  <div class="column centered-column centered-row" style="width: 50%; height: 100%;">
+    <div class="row">
+      <h2>
+        Acceso
+      </h2>
+    </div>
+    <div style="width: auto; padding: 10px">
+      <form [formGroup]="form" >
+        <div>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="username">
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password">
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{showPassword?'visibility_off':'visibility'}}
+            </mat-icon>
+          </mat-form-field>
+          <div class="row" style="justify-content: end; padding: 0">
+            <p class="link" (click)="clickForgotMyPassword()">Olvidé mi contraseña</p>
+          </div>
+        </div>
+
+        <div class="row centered-row" style="justify-content: center; width: 100%">
+          <button style="width: 100%" mat-raised-button color="primary" (click)="clickLogin()">
+            Ingresar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
