@@ -14,8 +14,7 @@ export class SolicitudPacComponent implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
-    public dialogRef: MatDialogRef<SolicitudPacComponent>,
-    private snackbar : MatSnackBar) {
+    public dialogRef: MatDialogRef<SolicitudPacComponent>) {
     this.form = formBuilder.group({
       name : new FormControl(''),
       site : new FormControl(''),
@@ -29,12 +28,5 @@ export class SolicitudPacComponent implements OnInit {
 
   requestPac() {
     this.dialogRef.close();
-    this.snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
-      duration: 3000,
-      panelClass: 'error'
-    })
-    /*
-    * TODO: Realizar el envío de correo electrónico con los datos del formulario
-    * */
   }
 }

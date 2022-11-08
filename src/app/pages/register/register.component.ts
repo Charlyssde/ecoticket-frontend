@@ -8,6 +8,7 @@ import {ModalTycComponent} from "../../components/modal-tyc/modal-tyc.component"
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../utils/EqualityValidator";
+import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
 
 @Component({
   selector: 'app-register',
@@ -66,7 +67,20 @@ export class RegisterComponent implements OnInit {
   }
 
   clickRequestPac() {
-
+    let dialogRef = this.dialog.open(SolicitudPacComponent, {
+      panelClass: 'my-dialog-container',
+      width: '800px',
+      height: '80%'
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
+        duration: 3000,
+        panelClass: 'error'
+      })
+      /*
+      * TODO: Realizar el envío de correo electrónico con los datos del formulario
+      * */
+    })
   }
 
   togglePasswordVisibility() {
@@ -103,13 +117,6 @@ export class RegisterComponent implements OnInit {
         })
       }
     })
-  }
-
-  get passwordMatchError() {
-    return (
-      this.form.getError('mismatch') &&
-      this.form.get('confirmPassword')?.touched
-    );
   }
 
 }
