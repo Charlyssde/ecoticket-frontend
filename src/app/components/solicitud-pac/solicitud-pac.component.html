@@ -1,0 +1,29 @@
+<div class="container mt-2 col-11">
+  <h2>Solicita incorporar tu PAC</h2>
+  <form class="justify-content-center" [formGroup]="form">
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Nombre del PAC</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Sitio web del PAC</mat-label>
+      <input matInput formControlName="site">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Teléfono del distribuidor</mat-label>
+      <input matInput formControlName="phone">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col-12">
+      <mat-label>Datos de contacto extras</mat-label>
+      <textarea matInput formControlName="extras"></textarea>
+    </mat-form-field>
+    <div class="row flex-row-reverse p-3 gap-3">
+      <button class="col-2" (click)="requestPac()" mat-raised-button color="primary">
+        Solicitar
+      </button>
+      <button class="col-2" mat-dialog-close mat-raised-button>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
