@@ -86,9 +86,7 @@ export class RegisterComponent implements OnInit {
       panelClass: 'my-dialog-container',
       width: '600px',
       data: {
-        title: 'Confirmación',
-        message: 'Cancelar la firma es una acción que no se puede deshacer, y cancelará la firma del documento acutal, pero permitirá ' +
-          'seguir visualizando el documento firmado. ¿Está seguro de cancelar la firma?',
+        title: 'Confirmación'
       }
     });
     dialogRef.afterClosed().subscribe((data) => {

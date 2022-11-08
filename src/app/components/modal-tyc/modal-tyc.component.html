@@ -1,15 +1,19 @@
 <span class mat-dialog-title>{{ data.title }}</span>
 <section class="m-2 pb-2" mat-dialog-content>
-  Para continuar con el registro, por favor complete las siguientes opciones
   <div>
-    <mat-checkbox (change)="handleCheck($event, true)">
-      Acepto los <a href="www.google.com" target="_blank"> Términos y Condiciones </a>
+    <mat-checkbox color="primary" (change)="handleCheck($event, true)">
+      Acepto los <strong> Términos y Condiciones </strong>
     </mat-checkbox>
   </div>
   <div>
-    <mat-checkbox (change)="handleCheck($event, false)">
-      Acepto la <a href="www.google.com" target="_blank"> Política de privacidad </a>
+    <mat-checkbox color="primary" (change)="handleCheck($event, false)">
+      Acepto la <strong> Política de privacidad </strong>
     </mat-checkbox>
+  </div>
+  <div class="mt-3">
+    <h5 class="text-muted">
+      Se enviarán al correo electrónico proporcionado los documentos correspondientes
+    </h5>
   </div>
 </section>
 <div class="actions" align="end" mat-dialog-actions>
