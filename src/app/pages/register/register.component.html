@@ -14,6 +14,9 @@
             <mat-form-field appearance="outline" class="col-11" >
               <mat-label>Nombre comercial</mat-label>
               <input matInput formControlName="commercialName">
+              <mat-error *ngIf="this.form.controls['commercialName'].hasError('required')">
+                El campo Nombre Comercial es obligatorio
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
@@ -30,18 +33,30 @@
             <mat-form-field appearance="outline" class="col-10" >
               <mat-label>Razón social</mat-label>
               <input matInput formControlName="businessName">
+              <mat-error *ngIf="this.form.controls['businessName'].hasError('required')">
+                El campo Razón Social es obligatorio
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="col-10" >
               <mat-label>Email</mat-label>
               <input matInput formControlName="email">
+              <mat-error *ngIf="this.form.controls['email'].hasError('required')">
+                El campo email es obligatorio
+              </mat-error>
+              <mat-error *ngIf="this.form.controls['email'].hasError('pattern')">
+                El formato de correo electrónico no es el correcto
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="col-10" >
               <mat-label>Usuario</mat-label>
               <input matInput formControlName="username">
+              <mat-error *ngIf="this.form.controls['username'].hasError('required')">
+                El campo Username es obligatorio
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
@@ -51,12 +66,21 @@
               <mat-icon matSuffix (click)="togglePasswordVisibility()">
                 {{showPassword?'visibility_off':'visibility'}}
               </mat-icon>
+              <mat-error *ngIf="this.form.controls['password'].hasError('required')">
+                El campo Contraseña es obligatorio
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-md-6">
             <mat-form-field appearance="outline" class="col-10" >
               <mat-label>Repetir contraseña</mat-label>
-              <input matInput formControlName="passwordVerify">
+              <input type="password" matInput formControlName="confirmPassword">
+              <mat-error *ngIf="this.form.controls['confirmPassword'].errors?.['confirmedValidator']">
+                Las contraseñas no coinciden
+              </mat-error>
+              <mat-error *ngIf="this.form.controls['confirmPassword'].hasError('required')">
+                El campo Repetir contraseña es obligatorio
+              </mat-error>
             </mat-form-field>
           </div>
           <h3 class="col-md-6 text-success"> Servicios adicionales</h3>

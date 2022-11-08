@@ -1,9 +1,19 @@
 <span class mat-dialog-title>{{ data.title }}</span>
 <section class="m-2 pb-2" mat-dialog-content>
-  {{data.message}}
+  Para continuar con el registro, por favor complete las siguientes opciones
+  <div>
+    <mat-checkbox (change)="handleCheck($event, true)">
+      Acepto los <a href="www.google.com" target="_blank"> Términos y Condiciones </a>
+    </mat-checkbox>
+  </div>
+  <div>
+    <mat-checkbox (change)="handleCheck($event, false)">
+      Acepto la <a href="www.google.com" target="_blank"> Política de privacidad </a>
+    </mat-checkbox>
+  </div>
 </section>
 <div class="actions" align="end" mat-dialog-actions>
   <button mat-raised-button mat-dialog-close color="accent">Regresar</button>
-  <button class="button-primary" (click)="clickClose()" mat-raised-button color="primary">Confirmar</button>
+  <button class="button-primary" [disabled]="disabled" (click)="clickClose()" mat-raised-button color="primary">Confirmar</button>
 </div>
 

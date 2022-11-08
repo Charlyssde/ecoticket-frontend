@@ -25,6 +25,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {PagesComponent} from "./pages/pages.component";
 import { ModalTycComponent } from './components/modal-tyc/modal-tyc.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -36,25 +37,26 @@ import {MatDialogModule} from "@angular/material/dialog";
     PagesComponent,
     ModalTycComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    MatSelectModule,
-    MatButtonToggleModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        MatSelectModule,
+        MatButtonToggleModule,
+        MatSlideToggleModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatCheckboxModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

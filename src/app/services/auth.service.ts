@@ -21,6 +21,9 @@ export class AuthService {
       tap((response: any) => {
         const result: any = jwt_decode(response.token)
         sessionStorage.setItem('usuario', result.username)
+        sessionStorage.setItem('name', result.name)
+        sessionStorage.setItem('id', result.id)
+        sessionStorage.setItem('rol', result.rol)
         sessionStorage.setItem('token', response.token)
 
         this._usuario = {
@@ -36,7 +39,25 @@ export class AuthService {
   }
 
   public register(data : any) : Observable<any> {
-    return this.http.post(environment.api + 'register', data);
+    return this.http.post(environment.api + 'register', data).pipe(
+      tap((response: any) => {
+        const result: any = jwt_decode(response.token)
+        sessionStorage.setItem('usuario', result.username)
+        sessionStorage.setItem('name', result.name)
+        sessionStorage.setItem('id', result.id)
+        sessionStorage.setItem('rol', result.rol)
+        sessionStorage.setItem('token', response.token)
+
+        this._usuario = {
+          username: result.username,
+          token: response.token,
+          permissions: result.rol
+        }
+
+        sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+      }),
+      catchError(async (err) => err.error)
+    );
   }
 
   public logout() {

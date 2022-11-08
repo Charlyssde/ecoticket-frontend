@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ModalTycComponent} from "../../components/modal-tyc/modal-tyc.component";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
+import {CustomValidators} from "../../utils/EqualityValidator";
 
 @Component({
   selector: 'app-register',
@@ -40,23 +41,21 @@ export class RegisterComponent implements OnInit {
       commercialName : new FormControl('', [Validators.required]),
       person : new FormControl(1, [Validators.required]),
       businessName : new FormControl('', [Validators.required]),
-      email : new FormControl('', [Validators.required]),
+      email : new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       username : new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required]),
-      passwordVerify : new FormControl('', [Validators.required]),
+      confirmPassword : new FormControl('', [Validators.required]),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
       pac : new FormControl(0),
       userPac : new FormControl(''),
       passwordPac : new FormControl('')
-    })
+    }, {validator : CustomValidators.MatchValidator('password', 'confirmPassword')})
   }
 
   form : FormGroup;
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   changeAdditionalServices(event: MatSlideToggleChange) {
     this.showAdditonal = event.checked;
@@ -97,11 +96,22 @@ export class RegisterComponent implements OnInit {
         console.log("Closed")
         this.authService.register(this.form.value).subscribe((resp) => {
           console.log("Response -> ", resp)
+          let username = sessionStorage.getItem('usuario')
+          this.router.navigate(['/dashboard'])
+          this._snackbar.open(`Bienvenido ${username}`, '', {
+            duration: 3000,
+            panelClass: 'green-snackbar'
+          })
         })
-        /*
-        * TODO: Continue to the register
-        * */
       }
     })
   }
+
+  get passwordMatchError() {
+    return (
+      this.form.getError('mismatch') &&
+      this.form.get('confirmPassword')?.touched
+    );
+  }
+
 }
