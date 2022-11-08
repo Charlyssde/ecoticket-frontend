@@ -17,13 +17,24 @@ import {BaseURLInterceptor} from "./interceptors/base-urlinterceptor.interceptor
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { RegisterComponent } from './pages/register/register.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatSelectModule} from "@angular/material/select";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import { HeaderComponent } from './components/header/header.component';
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {PagesComponent} from "./pages/pages.component";
+import { ModalTycComponent } from './components/modal-tyc/modal-tyc.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    PagesComponent,
+    ModalTycComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +48,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatDialogModule
   ],
   providers: [
     {

@@ -19,15 +19,14 @@ export class AuthService {
   public login(user : LoginModel) : Observable<any>{
     return this.http.post(environment.api + 'login', user).pipe(
       tap((response: any) => {
-        const result: any = jwt_decode(response.access_token)
-        sessionStorage.setItem('usuario', result.given_name)
-        sessionStorage.setItem('token', response.access_token)
-        sessionStorage.setItem('refresh_token', response.refresh_token)
+        const result: any = jwt_decode(response.token)
+        sessionStorage.setItem('usuario', result.username)
+        sessionStorage.setItem('token', response.token)
 
         this._usuario = {
-          username: result.given_name,
-          token: response.access_token,
-          permissions: result.resource_access.usuarios.roles
+          username: result.username,
+          token: response.token,
+          permissions: result.rol
         }
 
         sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
@@ -36,18 +35,22 @@ export class AuthService {
     )
   }
 
+  public register(data : any) : Observable<any> {
+    return this.http.post(environment.api + 'register', data);
+  }
+
   public logout() {
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
 
   public isLoggedIn(): boolean {
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
     return token != null && token.length > 0;
   }
 
   public getToken(): string | null {
-    return this.isLoggedIn() ? localStorage.getItem('token') : null;
+    return this.isLoggedIn() ? sessionStorage.getItem('token') : null;
   }
 
 }

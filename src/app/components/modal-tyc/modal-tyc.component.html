@@ -1,0 +1,9 @@
+<span class mat-dialog-title>{{ data.title }}</span>
+<section class="m-2 pb-2" mat-dialog-content>
+  {{data.message}}
+</section>
+<div class="actions" align="end" mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="accent">Regresar</button>
+  <button class="button-primary" (click)="clickClose()" mat-raised-button color="primary">Confirmar</button>
+</div>
+

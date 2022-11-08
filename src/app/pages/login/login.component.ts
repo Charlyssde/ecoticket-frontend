@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {LoginModel} from "../../models/login-model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   showPassword: boolean = false;
 
   constructor(
+    private router : Router,
     private formBuilder : FormBuilder,
     private authService : AuthService,
     private _snackbar: MatSnackBar,) {
@@ -37,13 +39,19 @@ export class LoginComponent implements OnInit {
   }
 
   clickLogin() {
+    if(!this.form.valid){
+      this._snackbar.open('Por favor complete los campos para poder ingresar', '', {
+        duration: 3000,
+        panelClass: 'error'
+      })
+      return
+    }
     let user = new LoginModel();
     user.username = this.form.controls['username'].value;
     user.password = this.form.controls['password'].value;
     this.authService.login(user).subscribe((resp) => {
-      if(resp.error){
+      if(resp && resp.error){
         const error = resp.error;
-        console.log(error)
         this._snackbar.open(error, '', {
           duration: 3000,
           panelClass: 'error'
@@ -51,6 +59,7 @@ export class LoginComponent implements OnInit {
         return;
       }
       let username = sessionStorage.getItem('usuario')
+      this.router.navigate(['/dashboard'])
       this._snackbar.open(`Bienvenido ${username}`, '', {
         duration: 3000,
         panelClass: 'green-snackbar'
@@ -58,5 +67,9 @@ export class LoginComponent implements OnInit {
     }, error => {
 
     })
+  }
+
+  clickRegister() {
+    this.router.navigate(['/register'])
   }
 }
