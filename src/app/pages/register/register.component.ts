@@ -72,14 +72,18 @@ export class RegisterComponent implements OnInit {
       width: '800px',
       height: '80%'
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
-        duration: 3000,
-        panelClass: 'error'
-      })
-      /*
-      * TODO: Realizar el envío de correo electrónico con los datos del formulario
-      * */
+    dialogRef.afterClosed().subscribe((resp) => {
+      if(resp.data){
+        this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
+          duration: 3000,
+          panelClass: 'error'
+        })
+      }else{
+        this._snackbar.open('Ha ocurrido un error al enviar la solicitud, por favor intente más tarde', '', {
+          duration: 3000,
+          panelClass: 'error'
+        })
+      }
     })
   }
 

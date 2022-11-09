@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MailService} from "../../services/mail.service";
 
 @Component({
   selector: 'app-solicitud-pac',
@@ -13,6 +14,7 @@ export class SolicitudPacComponent implements OnInit {
   form : FormGroup;
 
   constructor(
+    private mailService : MailService,
     private formBuilder : FormBuilder,
     public dialogRef: MatDialogRef<SolicitudPacComponent>) {
     this.form = formBuilder.group({
@@ -27,6 +29,10 @@ export class SolicitudPacComponent implements OnInit {
   }
 
   requestPac() {
-    this.dialogRef.close();
+    this.mailService.sendPacRquest(this.form.value).subscribe((resp) => {
+      console.log(resp)
+      this.dialogRef.close({data : true});
+    }, error => {this.dialogRef.close()})
+
   }
 }
