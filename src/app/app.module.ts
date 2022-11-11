@@ -27,6 +27,9 @@ import { ModalTycComponent } from './components/modal-tyc/modal-tyc.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatPaginatorModule} from "@angular/material/paginator";
+import { SucursalComponent } from './pages/sucursal/sucursal.component';
 
 @NgModule({
   declarations: [
@@ -37,28 +40,31 @@ import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.
     HeaderComponent,
     PagesComponent,
     ModalTycComponent,
-    SolicitudPacComponent
+    SolicitudPacComponent,
+    SucursalComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        MatButtonModule,
-        HttpClientModule,
-        MatSnackBarModule,
-        MatSelectModule,
-        MatButtonToggleModule,
-        MatSlideToggleModule,
-        MatToolbarModule,
-        MatDialogModule,
-        MatCheckboxModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

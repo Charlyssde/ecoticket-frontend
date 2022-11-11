@@ -5,6 +5,7 @@ import {AuthGuard} from "./guard/auth.guard";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {PagesComponent} from "./pages/pages.component";
+import {SucursalComponent} from "./pages/sucursal/sucursal.component";
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     canActivate : [AuthGuard],
     children : [
       {path : 'dashboard', component: DashboardComponent},
+      {path : 'sucursal', component: SucursalComponent},
       {path: "", redirectTo: "/dashboard", pathMatch: "full" },
     ]
   },

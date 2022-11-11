@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $ecoticket-frontend-primary: mat.define-palette(mat.$green-palette);
-$ecoticket-frontend-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$ecoticket-frontend-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $ecoticket-frontend-warn: mat.define-palette(mat.$red-palette);
@@ -86,4 +86,22 @@ mat-icon{
   padding: 8px !important;
 
   border-top: 1px solid rgba(177, 177, 177, 0.5);
+}
+.header-title{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+table{
+  width: 100%;
+}
+.mat-header-cell {
+  font-weight: bold;
+}
+.mat-cell{
+  padding: 10px !important;
 }
