@@ -30,6 +30,7 @@ import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SucursalComponent } from './pages/sucursal/sucursal.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -43,28 +44,29 @@ import { SucursalComponent } from './pages/sucursal/sucursal.component';
     SolicitudPacComponent,
     SucursalComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    MatSnackBarModule,
-    MatSelectModule,
-    MatButtonToggleModule,
-    MatSlideToggleModule,
-    MatToolbarModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatPaginatorModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        MatButtonModule,
+        HttpClientModule,
+        MatSnackBarModule,
+        MatSelectModule,
+        MatButtonToggleModule,
+        MatSlideToggleModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatMenuModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
