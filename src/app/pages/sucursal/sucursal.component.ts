@@ -24,4 +24,7 @@ export class SucursalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleAddCsd() {
+
+  }
 }
