@@ -27,6 +27,7 @@ import { ModalTycComponent } from './components/modal-tyc/modal-tyc.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.component';
+import { UserComponent } from './pages/user/user.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.
     HeaderComponent,
     PagesComponent,
     ModalTycComponent,
-    SolicitudPacComponent
+    SolicitudPacComponent,
+    UserComponent
   ],
     imports: [
         BrowserModule,
