@@ -1,0 +1,15 @@
+.tarjeta{
+  width: 30%;
+  height: 150px;
+  padding: 5px;
+  border: 1px solid green;
+  background-color: rgba(0, 128, 0, 0.12);
+  border-radius: 7px;
+}
+.card-icon{
+  transform: scale(1.5);
+}
+.cd{
+  display: flex;
+  gap: 25px;
+}

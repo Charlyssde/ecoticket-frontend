@@ -1,0 +1,54 @@
+<div class="header-title mt-2">
+  <h1 class="fw-bold fs-1">
+    {{title}}
+  </h1>
+</div>
+<div class="container">
+  <h4 class="text-end fst-italic">RFC: {{data.rfc}}</h4>
+  <div class="cd">
+    <div class="tarjeta d-flex flex-row">
+      <div class="p-2" style="color: royalblue">
+        <mat-icon class="card-icon" >receipt_long</mat-icon>
+      </div>
+      <div class="d-flex flex-column">
+        <h2>Tickets generados</h2>
+        <h1 class="fw-bold"> 500 </h1>
+      </div>
+    </div>
+    <div class="tarjeta d-flex flex-row">
+      <div class="p-2" style="color: rebeccapurple">
+        <mat-icon class="card-icon">task</mat-icon>
+      </div>
+      <div class="d-flex flex-column">
+        <h2>Facturas generadas</h2>
+        <h1 class="fw-bold"> 152 </h1>
+      </div>
+    </div>
+    <div class="tarjeta d-flex flex-row">
+      <div class="p-2" style="color: orange">
+        <mat-icon class="card-icon">memory</mat-icon>
+      </div>
+      <div class="d-flex flex-column">
+        <h2>CSD agregado</h2>
+        <div class="d-flex justify-content-center">
+          <mat-icon style="color: green" class="card-icon" *ngIf="true">check</mat-icon>
+          <mat-icon style="color: red" class="card-icon" *ngIf="false">cancel</mat-icon>
+        </div>
+      </div>
+    </div>
+    <div class="tarjeta d-flex flex-row">
+      <div class="p-2" style="color: indianred">
+        <mat-icon class="card-icon">attach_money</mat-icon>
+      </div>
+      <div class="d-flex flex-column">
+        <h2>Total a pagar</h2>
+        <h1 class="fw-bold">$1,326 </h1>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 d-flex justify-content-end">
+    <button mat-raised-button color="primary">
+      Agregar CSD
+    </button>
+  </div>
+</div>
