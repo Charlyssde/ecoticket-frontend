@@ -1,0 +1,59 @@
+<div class="header-modal">
+  Agregar SCD
+</div>
+<div class="container">
+  <form [formGroup]="form">
+    <div class="d-flex flex-row">
+      <section class="col-6">
+        <mat-form-field class="col-10" appearance="outline">
+          <mat-label>Nombre sin regimen socitario</mat-label>
+          <input matInput formControlName="name"/>
+        </mat-form-field>
+      </section>
+      <section class="col-6">
+        <mat-form-field class="col-10" appearance="outline">
+          <mat-label>Contraseña CSD's</mat-label>
+          <input type="password" matInput formControlName="password"/>
+        </mat-form-field>
+      </section>
+    </div>
+    <div class="d-flex flex-row">
+      <div class="col-6">
+        <div class="container-file col-10">
+          <div (click)="fileInputCer.click()">
+            <div class="button-file fw-bold">
+              <mat-icon class="card-icon">backup</mat-icon>
+              Selecciona un archivo .cer
+            </div>
+          </div>
+          <input accept=".cer" id="file_cert" (change)="onCerSelected($event)" type="file" hidden #fileInputCer formControlName="cer">
+          <div class="d-flex justify-content-center">
+            <p class="p-file"> {{inputCer}} </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="container-file col-10">
+          <div (click)="fileInputKey.click()">
+            <div class="button-file fw-bold">
+              <mat-icon class="card-icon">backup</mat-icon>
+              Selecciona un archivo .key
+            </div>
+          </div>
+          <input accept=".key" id="file_key" (change)="onKeySelected($event)" type="file" hidden #fileInputKey formControlName="key">
+          <div class="d-flex justify-content-center">
+            <p class="p-file"> {{inputKey}} </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-start flex-row-reverse gap-3 mt-5">
+        <button (click)="clickSaveScd()" mat-raised-button color="primary">
+          Guardar
+        </button>
+      <button mat-dialog-close mat-raised-button>
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

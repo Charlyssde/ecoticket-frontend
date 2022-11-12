@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,7 +11,10 @@ export class HeaderComponent implements OnInit {
 
   username : string = '';
 
-  constructor() {
+  constructor(
+    private authService : AuthService,
+    private router : Router
+  ) {
     // @ts-ignore
     this.username = sessionStorage.getItem('name')
   }
@@ -17,4 +22,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  handleProfile() {
+
+  }
+
+  handleLogout() {
+    this.authService.logout();
+  }
+
+  handlePermissions() : boolean {
+    return this.router.url.includes( '/sucursal?')
+  }
+
+  handleClickUsers() {
+    this.router.navigate(['/user'])
+  }
 }
