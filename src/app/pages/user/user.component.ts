@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import { User } from './../../models/user';
 import {MatTableDataSource} from "@angular/material/table";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-user',
@@ -30,6 +31,7 @@ export class UserComponent implements OnInit {
   }
 
   constructor(
+    private _snackbar : MatSnackBar,
     public router : Router,
   ) {
     this.datasource = new MatTableDataSource<User>();

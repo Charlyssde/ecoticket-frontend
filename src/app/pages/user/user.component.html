@@ -24,7 +24,9 @@
         <th class="text-center" mat-header-cell *matHeaderCellDef>Activo</th>
         <td mat-cell *matCellDef="let element">
           <div class="text-center">
-            {{ element.activo }}
+            <mat-slide-toggle  [checked]="element.activo">
+
+            </mat-slide-toggle>
           </div>
         </td>
       </ng-container>
