@@ -31,6 +31,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SucursalComponent } from './pages/sucursal/sucursal.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { CsdComponent } from './components/csd/csd.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatMenuModule} from "@angular/material/menu";
     PagesComponent,
     ModalTycComponent,
     SolicitudPacComponent,
-    SucursalComponent
+    SucursalComponent,
+    CsdComponent
   ],
     imports: [
         BrowserModule,

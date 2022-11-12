@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {StoreModel} from "../../models/store-model";
+import {MatDialog} from "@angular/material/dialog";
+import {CsdComponent} from "../../components/csd/csd.component";
 
 @Component({
   selector: 'app-sucursal',
@@ -15,9 +17,9 @@ export class SucursalComponent implements OnInit {
   title : string = '';
 
   constructor(
-    private router : Router
+    private router : Router,
+    private dialog : MatDialog
   ) {
-    console.log("Router -> ", this.router.routerState.snapshot.root.queryParams);
     this.title = this.data.name;
   }
 
@@ -25,6 +27,9 @@ export class SucursalComponent implements OnInit {
   }
 
   handleAddCsd() {
-
+    let dialogRef = this.dialog.open(CsdComponent,{
+      width : '800px',
+      height : '67%'
+    });
   }
 }

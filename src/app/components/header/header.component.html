@@ -24,6 +24,14 @@
   <mat-toolbar-row class="mb-2">
     <div class="logo"></div>
     <menu class="info-navbar">
+      <button *ngIf="handlePermissions()" mat-raised-button>
+        <mat-icon class="fw-bold" color="primary">description</mat-icon>
+        <span class="fw-bold" style="color: green">Reportes</span>
+      </button>
+      <button (click)="handleClickUsers()" *ngIf="handlePermissions()" mat-raised-button>
+        <mat-icon class="fw-bold" color="primary">people</mat-icon>
+        <span class="fw-bold" style="color: green">Usuarios</span>
+      </button>
     </menu>
   </mat-toolbar-row>
 </mat-toolbar>
