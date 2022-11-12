@@ -5,11 +5,8 @@ import {AuthGuard} from "./guard/auth.guard";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {RegisterComponent} from "./pages/register/register.component";
 import {PagesComponent} from "./pages/pages.component";
-<<<<<<< HEAD
 import { UserComponent } from './pages/user/user.component';
-=======
 import {SucursalComponent} from "./pages/sucursal/sucursal.component";
->>>>>>> dev-cc
 
 const routes: Routes = [
   {

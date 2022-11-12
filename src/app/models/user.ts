@@ -1,8 +1,8 @@
 export interface User {
   username:string,
   name:string,
-  password:string,
-  phone:string,
-  email:string,
+  activo:boolean,
+  fecha:string
+  sucursal:string,
   role:string
 }

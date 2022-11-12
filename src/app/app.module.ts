@@ -27,13 +27,10 @@ import { ModalTycComponent } from './components/modal-tyc/modal-tyc.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { SolicitudPacComponent } from './components/solicitud-pac/solicitud-pac.component';
-<<<<<<< HEAD
 import { UserComponent } from './pages/user/user.component';
-=======
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SucursalComponent } from './pages/sucursal/sucursal.component';
->>>>>>> dev-cc
 
 @NgModule({
   declarations: [
@@ -45,9 +42,7 @@ import { SucursalComponent } from './pages/sucursal/sucursal.component';
     PagesComponent,
     ModalTycComponent,
     SolicitudPacComponent,
-<<<<<<< HEAD
-    UserComponent
-=======
+    UserComponent,
     SucursalComponent
   ],
   imports: [
@@ -71,7 +66,6 @@ import { SucursalComponent } from './pages/sucursal/sucursal.component';
     MatCheckboxModule,
     MatTableModule,
     MatPaginatorModule
->>>>>>> dev-cc
   ],
   providers: [
     {
