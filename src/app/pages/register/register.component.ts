@@ -9,6 +9,7 @@ import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../utils/EqualityValidator";
 import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +38,8 @@ export class RegisterComponent implements OnInit {
     private _snackbar : MatSnackBar,
     public router : Router,
     private dialog: MatDialog,
-    private authService : AuthService) {
+    private authService : AuthService,
+    private mailService : MailService) {
     this.form = formBuilder.group({
       commercialName : new FormControl('', [Validators.required]),
       person : new FormControl(1, [Validators.required]),
@@ -111,6 +113,13 @@ export class RegisterComponent implements OnInit {
       if(data.data){
         console.log("Closed")
         this.authService.register(this.form.value).subscribe((resp) => {
+          this.mailService.sendCondiciones(this.form.value).subscribe(resp => {
+            this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
+              duration : 2500,
+              verticalPosition : 'top',
+              horizontalPosition : 'end'
+            })
+          });
           console.log("Response -> ", resp)
           let username = sessionStorage.getItem('usuario')
           this.router.navigate(['/dashboard'])
