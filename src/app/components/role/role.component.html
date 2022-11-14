@@ -10,15 +10,13 @@
    <div>
     <strong><p><mat-checkbox formControlName="csd">Agregar CSD</mat-checkbox></p></strong>
    </div>
-    <div class="d-flex justify-content-start flex-row-reverse gap-3 mt-5">
-
-        <button (click)="clickGuardarrol()" mat-raised-button color="primary">
-          Guardar
-        </button>
-      <button mat-dialog-close mat-raised-button>
-        Cancelar
-      </button>
-    </div>
-
   </form>
+</div>
+<div class="actions" align="end" mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>
+    Cancelar
+  </button>
+  <button (click)="clickGuardarrol()" mat-raised-button color="primary">
+    Guardar
+  </button>
 </div>

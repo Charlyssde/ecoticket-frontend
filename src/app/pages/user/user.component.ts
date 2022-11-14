@@ -6,6 +6,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import { RoleComponent } from 'src/app/components/role/role.component';
+import { UserSaveComponent } from 'src/app/components/user-save/user-save.component';
+import { UserEditComponent } from 'src/app/components/user-edit/user-edit.component';
 
 @Component({
   selector: 'app-user',
@@ -29,7 +31,10 @@ export class UserComponent implements OnInit {
   ];
 
   newuser() {
-
+    let dialogRef = this.dialog.open(UserSaveComponent,{
+      width : '700px',
+      height : 'auto'
+    });
   }
 
   constructor(
@@ -46,7 +51,10 @@ export class UserComponent implements OnInit {
   }
 
   useredit(element : User) {
-
+    let dialogRef = this.dialog.open(UserEditComponent,{
+      width : '700px',
+      height : 'auto'
+    });
   }
 
   userdelete(id: string) {

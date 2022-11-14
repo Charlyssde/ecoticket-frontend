@@ -34,6 +34,8 @@ import { SucursalComponent } from './pages/sucursal/sucursal.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CsdComponent } from './components/csd/csd.component';
 import { RoleComponent } from './components/role/role.component';
+import { UserSaveComponent } from './components/user-save/user-save.component';
+import { UserEditComponent } from './components/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { RoleComponent } from './components/role/role.component';
     UserComponent,
     SucursalComponent,
     CsdComponent,
-    RoleComponent
+    RoleComponent,
+    UserSaveComponent,
+    UserEditComponent
   ],
     imports: [
         BrowserModule,

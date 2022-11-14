@@ -1,0 +1,97 @@
+<span class mat-dialog-title>
+  <mat-icon>add</mat-icon>
+  Agregar Usuario</span>
+<div class="container">
+  <section class="m-2 pb-3" mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="d-flex flex-row">
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="name"/>
+            <mat-error *ngIf="this.form.controls['name'].hasError('required')">
+              El campo Nombre es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput formControlName="username"/>
+            <mat-error *ngIf="this.form.controls['username'].hasError('required')">
+              El campo Usuario es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+    </div>
+    <div class="d-flex flex-row">
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Primer Apellido</mat-label>
+            <input matInput formControlName="apellidouno"/>
+            <mat-error *ngIf="this.form.controls['apellidouno'].hasError('required')">
+              El campo Primer Apellido es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input  type="password" matInput formControlName="password"/>
+            <mat-error *ngIf="this.form.controls['password'].hasError('required')">
+              El campo Contraseña es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+    </div>
+    <div class="d-flex flex-row">
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Segundo Apellido</mat-label>
+            <input matInput formControlName="apellidodos"/>
+          </mat-form-field>
+        </section>
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Contraseña de nuevo</mat-label>
+            <input type="password" matInput formControlName="confirmPassword"/>
+            <mat-error *ngIf="this.form.controls['confirmPassword'].errors?.['confirmedValidator']">
+              Las contraseñas no coinciden
+            </mat-error>
+            <mat-error *ngIf="this.form.controls['confirmPassword'].hasError('required')">
+              El campo Contraseña de nuevo es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+    </div>
+    <div class="d-flex flex-row">
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Rol</mat-label>
+            <input matInput formControlName="rol"/>
+            <mat-error *ngIf="this.form.controls['rol'].hasError('required')">
+              El campo Rol es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+        <section class="col-6">
+          <mat-form-field class="col-10" appearance="outline">
+            <mat-label>Permiso</mat-label>
+            <input matInput formControlName="permiso"/>
+            <mat-error *ngIf="this.form.controls['permiso'].hasError('required')">
+              El campo Permisos es obligatorio
+            </mat-error>
+          </mat-form-field>
+        </section>
+  </div>
+  </form>
+</section>
+</div>
+<div class="actions" align="end" mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>
+    Cancelar
+  </button>
+  <button (click)="clicksaveuser()" mat-raised-button color="primary">
+    Guardar
+  </button>
+</div>
