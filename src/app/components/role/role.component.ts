@@ -11,9 +11,9 @@ export class RoleComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder) {
     this.form = formBuilder.group({
-    pepperoni: false,
-    extracheese: false,
-    mushroom: false,
+    usuario: false,
+    reporte: false,
+    csd: false,
     })
    }
 

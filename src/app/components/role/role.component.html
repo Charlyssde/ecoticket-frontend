@@ -1,16 +1,14 @@
-<div class="header-modal">
-  Asignar Permisos - Usuario
-</div>
+<span class mat-dialog-title>Asignar Permisos - Usuario</span>
 <div class="container">
   <form [formGroup]="form">
     <div class="d-flex flex-row">
-      <p><mat-checkbox formControlName="pepperoni">Crear Usuario</mat-checkbox></p>
+    <strong><p><mat-checkbox formControlName="usuario">Crear Usuario</mat-checkbox></p></strong>
     </div>
     <div>
-      <p><mat-checkbox formControlName="extracheese">Ver Reporte</mat-checkbox></p>
+    <strong><p><mat-checkbox formControlName="reporte">Ver Reporte</mat-checkbox></p></strong>
     </div>
    <div>
-    <p><mat-checkbox formControlName="mushroom">Agregar CSD</mat-checkbox></p>
+    <strong><p><mat-checkbox formControlName="csd">Agregar CSD</mat-checkbox></p></strong>
    </div>
     <div class="d-flex justify-content-start flex-row-reverse gap-3 mt-5">
 
