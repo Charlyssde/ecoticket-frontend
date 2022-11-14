@@ -70,7 +70,7 @@ export class RegisterComponent implements OnInit {
     let dialogRef = this.dialog.open(SolicitudPacComponent, {
       panelClass: 'my-dialog-container',
       width: '800px',
-      height: '80%'
+      height: '478px'
     });
     dialogRef.afterClosed().subscribe((resp) => {
       if(resp.data){
