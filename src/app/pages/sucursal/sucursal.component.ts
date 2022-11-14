@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {StoreModel} from "../../models/store-model";
 import {MatDialog} from "@angular/material/dialog";
 import {CsdComponent} from "../../components/csd/csd.component";
+import {StoresService} from "../../services/stores.service";
 
 @Component({
   selector: 'app-sucursal',
@@ -11,16 +12,35 @@ import {CsdComponent} from "../../components/csd/csd.component";
 })
 export class SucursalComponent implements OnInit {
 
-  data : StoreModel =
-    {id : '0', name : 'CCStores sucursal campo de tiro', rfc : '123456789988', generatedTickets : 500, generatedInvoices : 231};
+  data : StoreModel = {
+    cert: "",
+    csdPassword: "",
+    generatedInvoices: 0,
+    generatedTickets: 0,
+    id: "",
+    toPay : 0,
+    key: "",
+    name: "",
+    nss: "",
+    owner: "",
+    rfc: ""
+  };
 
   title : string = '';
 
   constructor(
-    private router : Router,
-    private dialog : MatDialog
+    private route : ActivatedRoute,
+    private dialog : MatDialog,
+    private storeService : StoresService
   ) {
-    this.title = this.data.name;
+    this.route.queryParams.subscribe((params) => {
+      const id = params[0]
+      this.storeService.getStore(id).subscribe((data) => {
+        this.data = data;
+        this.title = this.data.name;
+      });
+    });
+
   }
 
   ngOnInit(): void {

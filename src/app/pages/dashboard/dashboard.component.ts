@@ -4,6 +4,7 @@ import {StoreModel} from "../../models/store-model";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {StoresService} from "../../services/stores.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -18,23 +19,37 @@ export class DashboardComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  data : StoreModel[] = [
-    {id : '0', name : 'CCStores sucursal campo de tiro', rfc : '123456789988', generatedTickets : 500, generatedInvoices : 231},
-    {id : '1', name : 'CCStores sucursal centro', rfc : 'ASDHJUFYYY', generatedTickets : 500, generatedInvoices : 231},
-    {id : '2', name : 'CCStores sucursal americas', rfc : '1Q2W3E4R5T', generatedTickets : 500, generatedInvoices : 231},
-    {id : '3', name : 'CCStores sucursal crystal', rfc : 'QAWS34ER56', generatedTickets : 500, generatedInvoices : 231},
-    ]
+  data : StoreModel = {
+    cert: "",
+    csdPassword: "",
+    generatedInvoices: 0,
+    generatedTickets: 0,
+    id: "",
+    toPay : 0,
+    key: "",
+    name: "",
+    nss: "",
+    owner: "",
+    rfc: ""
+  };
 
   constructor(
     private _snackbar : MatSnackBar,
     private router : Router,
+    private storeService : StoresService,
   ) {
     this.datasource = new MatTableDataSource<StoreModel>();
   }
 
   ngOnInit(): void {
-    this.datasource = new MatTableDataSource<StoreModel>(this.data);
-    this.datasource.paginator = this.paginator;
+    const id = sessionStorage.getItem('id');
+    if(id !== null){
+      this.storeService.getAllStores(id).subscribe((data) => {
+        this.data = data[0];
+        this.datasource = new MatTableDataSource<StoreModel>(data);
+        this.datasource.paginator = this.paginator;
+      })
+    }
   }
 
   addNewStore() {

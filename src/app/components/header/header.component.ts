@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handlePermissions() : boolean {
-    return this.router.url.includes( '/sucursal?')
+    return this.router.url.includes( '/sucursal')
   }
 
   handleClickUsers() {
