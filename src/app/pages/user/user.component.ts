@@ -4,6 +4,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import { User } from './../../models/user';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import { RoleComponent } from 'src/app/components/role/role.component';
 
 @Component({
   selector: 'app-user',
@@ -33,6 +35,7 @@ export class UserComponent implements OnInit {
   constructor(
     private _snackbar : MatSnackBar,
     public router : Router,
+    private dialog : MatDialog
   ) {
     this.datasource = new MatTableDataSource<User>();
   }
@@ -48,6 +51,13 @@ export class UserComponent implements OnInit {
 
   userdelete(id: string) {
 
+  }
+
+  assigrole(element : User) {
+    let dialogRef = this.dialog.open(RoleComponent,{
+      width : '500px',
+      height : 'auto'
+    });
   }
 
   handleClickView(id : string) {

@@ -1,0 +1,26 @@
+<div class="header-modal">
+  Asignar Permisos - Usuario
+</div>
+<div class="container">
+  <form [formGroup]="form">
+    <div class="d-flex flex-row">
+      <p><mat-checkbox formControlName="pepperoni">Crear Usuario</mat-checkbox></p>
+    </div>
+    <div>
+      <p><mat-checkbox formControlName="extracheese">Ver Reporte</mat-checkbox></p>
+    </div>
+   <div>
+    <p><mat-checkbox formControlName="mushroom">Agregar CSD</mat-checkbox></p>
+   </div>
+    <div class="d-flex justify-content-start flex-row-reverse gap-3 mt-5">
+
+        <button (click)="clickGuardarrol()" mat-raised-button color="primary">
+          Guardar
+        </button>
+      <button mat-dialog-close mat-raised-button>
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+</div>
