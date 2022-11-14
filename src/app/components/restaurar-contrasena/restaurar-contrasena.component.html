@@ -1,0 +1,17 @@
+<span class mat-dialog-title>Restaurar contraseña</span>
+<section class="m-2 pb-2" mat-dialog-content>
+  <form [formGroup]="form" >
+    <mat-form-field class="col-12" appearance="outline">
+      <mat-label>Correo: </mat-label>
+      <input matInput formControlName="email" />
+    </mat-form-field>
+  </form>
+</section>
+<div class="actions" align="end" mat-dialog-actions>
+  <button mat-dialog-close mat-raised-button>
+    Cancelar
+  </button>
+  <button (click)="clickRestorePassword()" mat-raised-button color="primary">
+    Restaurar
+  </button>
+</div>

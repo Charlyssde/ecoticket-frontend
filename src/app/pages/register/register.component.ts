@@ -9,6 +9,7 @@ import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 import {CustomValidators} from "../../utils/EqualityValidator";
 import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
+import { MailService } from 'src/app/services/mail.service';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +38,8 @@ export class RegisterComponent implements OnInit {
     private _snackbar : MatSnackBar,
     public router : Router,
     private dialog: MatDialog,
-    private authService : AuthService) {
+    private authService : AuthService,
+    private mailService : MailService) {
     this.form = formBuilder.group({
       commercialName : new FormControl('', [Validators.required]),
       person : new FormControl(1, [Validators.required]),
@@ -46,6 +48,7 @@ export class RegisterComponent implements OnInit {
       username : new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required]),
       confirmPassword : new FormControl('', [Validators.required]),
+      role : new FormControl('Administrador'),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
       pac : new FormControl(0),
@@ -67,24 +70,11 @@ export class RegisterComponent implements OnInit {
   }
 
   clickRequestPac() {
-    let dialogRef = this.dialog.open(SolicitudPacComponent, {
+    this.dialog.open(SolicitudPacComponent, {
       panelClass: 'my-dialog-container',
       width: '800px',
       height: '478px'
     });
-    dialogRef.afterClosed().subscribe((resp) => {
-      if(resp.data){
-        this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
-          duration: 3000,
-          panelClass: 'error'
-        })
-      }else{
-        this._snackbar.open('Ha ocurrido un error al enviar la solicitud, por favor intente más tarde', '', {
-          duration: 3000,
-          panelClass: 'error'
-        })
-      }
-    })
   }
 
   togglePasswordVisibility() {
@@ -111,6 +101,13 @@ export class RegisterComponent implements OnInit {
       if(data.data){
         console.log("Closed")
         this.authService.register(this.form.value).subscribe((resp) => {
+          this.mailService.sendCondiciones({to : this.form.controls['email'].value}).subscribe(resp => {
+            this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
+              duration : 2500,
+              verticalPosition : 'top',
+              horizontalPosition : 'end'
+            })
+          });
           console.log("Response -> ", resp)
           let username = sessionStorage.getItem('usuario')
           this.router.navigate(['/dashboard'])

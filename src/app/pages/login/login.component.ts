@@ -4,6 +4,8 @@ import {AuthService} from "../../services/auth.service";
 import {LoginModel} from "../../models/login-model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {RestaurarContrasenaComponent} from "../../components/restaurar-contrasena/restaurar-contrasena.component";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,8 @@ export class LoginComponent implements OnInit {
     private router : Router,
     private formBuilder : FormBuilder,
     private authService : AuthService,
-    private _snackbar: MatSnackBar,) {
+    private _snackbar: MatSnackBar,
+    private dialog : MatDialog) {
     this.form = formBuilder.group({
       username : new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required])
@@ -35,7 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   clickForgotMyPassword() {
-
+    this.dialog.open(RestaurarContrasenaComponent, {
+      height : '230px',
+      width : '600px',
+      panelClass : 'my-dialog-container'
+    })
   }
 
   clickLogin() {
@@ -46,9 +53,10 @@ export class LoginComponent implements OnInit {
       })
       return
     }
-    let user = new LoginModel();
-    user.username = this.form.controls['username'].value;
-    user.password = this.form.controls['password'].value;
+    let user : LoginModel = {
+      username : this.form.controls['username'].value,
+      password : this.form.controls['password'].value
+    }
     this.authService.login(user).subscribe((resp) => {
       if(resp && resp.error){
         const error = resp.error;

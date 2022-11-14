@@ -15,6 +15,7 @@ export class SolicitudPacComponent implements OnInit {
 
   constructor(
     private mailService : MailService,
+    private _snackbar : MatSnackBar,
     private formBuilder : FormBuilder,
     public dialogRef: MatDialogRef<SolicitudPacComponent>) {
     this.form = formBuilder.group({
@@ -31,8 +32,18 @@ export class SolicitudPacComponent implements OnInit {
   requestPac() {
     this.mailService.sendPacRquest(this.form.value).subscribe((resp) => {
       console.log(resp)
-      this.dialogRef.close({data : true});
-    }, error => {this.dialogRef.close()})
+      this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
+        duration: 3000,
+        panelClass: 'error'
+      });
+      this.dialogRef.close();
+    }, error => {
+      this._snackbar.open('Ha ocurrido un error al enviar el correo electrónico', '', {
+        duration: 3000,
+        panelClass: 'error'
+      })
+      this.dialogRef.close()
+    })
 
   }
 }
