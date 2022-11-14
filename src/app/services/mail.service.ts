@@ -19,7 +19,10 @@ export class MailService {
   }
 
   sendCredenciales(data : any) : Observable<any> {
-    return this.http.post(environment.api + 'email-credenciales', data)
+    return this.http.post(environment.api + 'email-credenciales', data);
   }
 
+  sendRestorePassword(data : any) : Observable<any>{
+    return this.http.post(environment.api + 'email-password', data);
+  }
 }
