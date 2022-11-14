@@ -33,6 +33,7 @@ import {MatPaginatorModule} from "@angular/material/paginator";
 import { SucursalComponent } from './pages/sucursal/sucursal.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CsdComponent } from './components/csd/csd.component';
+import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/restaurar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CsdComponent } from './components/csd/csd.component';
     SolicitudPacComponent,
     UserComponent,
     SucursalComponent,
-    CsdComponent
+    CsdComponent,
+    RestaurarContrasenaComponent
   ],
     imports: [
         BrowserModule,

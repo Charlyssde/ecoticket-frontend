@@ -27,7 +27,7 @@ export class SucursalComponent implements OnInit {
   }
 
   handleAddCsd() {
-    let dialogRef = this.dialog.open(CsdComponent,{
+    this.dialog.open(CsdComponent,{
       panelClass: 'my-dialog-container',
       width : '800px',
       height : '355px'

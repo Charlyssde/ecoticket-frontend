@@ -67,24 +67,11 @@ export class RegisterComponent implements OnInit {
   }
 
   clickRequestPac() {
-    let dialogRef = this.dialog.open(SolicitudPacComponent, {
+    this.dialog.open(SolicitudPacComponent, {
       panelClass: 'my-dialog-container',
       width: '800px',
       height: '478px'
     });
-    dialogRef.afterClosed().subscribe((resp) => {
-      if(resp.data){
-        this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
-          duration: 3000,
-          panelClass: 'error'
-        })
-      }else{
-        this._snackbar.open('Ha ocurrido un error al enviar la solicitud, por favor intente más tarde', '', {
-          duration: 3000,
-          panelClass: 'error'
-        })
-      }
-    })
   }
 
   togglePasswordVisibility() {
