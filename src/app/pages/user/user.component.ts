@@ -16,7 +16,7 @@ export class UserComponent implements OnInit {
 
   datasource : MatTableDataSource<User>;
   displayedColumns : string[] = [
-    'Nombre','Usuario', 'Activo', 'Fecha', 'Sucursal', 'Asignar Rol','Acciones'
+    'Nombre','Usuario', 'Fecha', 'Sucursal', 'Asignar Rol','Acciones'
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
