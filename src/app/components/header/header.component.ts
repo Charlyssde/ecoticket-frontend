@@ -37,4 +37,8 @@ export class HeaderComponent implements OnInit {
   handleClickUsers() {
     this.router.navigate(['/user'])
   }
+
+  handleClickLogo() {
+    this.router.navigate(['/dashboard'])
+  }
 }
