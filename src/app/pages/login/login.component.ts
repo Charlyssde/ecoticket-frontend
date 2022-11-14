@@ -53,9 +53,10 @@ export class LoginComponent implements OnInit {
       })
       return
     }
-    let user = new LoginModel();
-    user.username = this.form.controls['username'].value;
-    user.password = this.form.controls['password'].value;
+    let user : LoginModel = {
+      username : this.form.controls['username'].value,
+      password : this.form.controls['password'].value
+    }
     this.authService.login(user).subscribe((resp) => {
       if(resp && resp.error){
         const error = resp.error;

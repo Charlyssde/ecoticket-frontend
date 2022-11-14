@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
       if(data.data){
         console.log("Closed")
         this.authService.register(this.form.value).subscribe((resp) => {
-          this.mailService.sendCondiciones(this.form.value).subscribe(resp => {
+          this.mailService.sendCondiciones({to : this.form.controls['email'].value}).subscribe(resp => {
             this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
               duration : 2500,
               verticalPosition : 'top',
