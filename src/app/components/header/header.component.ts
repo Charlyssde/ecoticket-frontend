@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
-    private router : Router
+    private router : Router,
+    private route : ActivatedRoute,
   ) {
     // @ts-ignore
     this.username = sessionStorage.getItem('name')
@@ -31,14 +32,25 @@ export class HeaderComponent implements OnInit {
   }
 
   handlePermissions() : boolean {
-    return this.router.url.includes( '/sucursal')
+    return this.router.url.includes( '/sucursal?')
   }
 
   handleClickUsers() {
-    this.router.navigate(['/user'])
+    this.route.queryParams.subscribe((params) => {
+      console.log(params)
+      this.router.navigate(['/user'], {queryParams : params})
+    });
+
   }
 
   handleClickLogo() {
     this.router.navigate(['/dashboard'])
+  }
+
+  handleClickCsd() {
+    this.route.queryParams.subscribe((params) => {
+      console.log(params)
+      this.router.navigate(['/csd'], {queryParams : params})
+    });
   }
 }

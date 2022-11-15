@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {StoreModel} from "../../models/store-model";
 import {MatDialog} from "@angular/material/dialog";
-import {CsdComponent} from "../../components/csd/csd.component";
+import {CsdComponent} from "../csd/csd.component";
 import {StoresService} from "../../services/stores.service";
 
 @Component({
@@ -27,15 +27,17 @@ export class SucursalComponent implements OnInit {
   };
 
   title : string = '';
+  id : string = '';
 
   constructor(
     private route : ActivatedRoute,
+    private router : Router,
     private dialog : MatDialog,
     private storeService : StoresService
   ) {
     this.route.queryParams.subscribe((params) => {
-      const id = params[0]
-      this.storeService.getStore(id).subscribe((data) => {
+      this.id = params[0]
+      this.storeService.getStore(this.id).subscribe((data) => {
         this.data = data;
         this.title = this.data.name;
       });
@@ -44,13 +46,5 @@ export class SucursalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  handleAddCsd() {
-    this.dialog.open(CsdComponent,{
-      panelClass: 'my-dialog-container',
-      width : '800px',
-      height : '355px'
-    });
   }
 }

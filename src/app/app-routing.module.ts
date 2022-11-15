@@ -7,6 +7,7 @@ import {RegisterComponent} from "./pages/register/register.component";
 import {PagesComponent} from "./pages/pages.component";
 import { UserComponent } from './pages/user/user.component';
 import {SucursalComponent} from "./pages/sucursal/sucursal.component";
+import {CsdComponent} from "./pages/csd/csd.component";
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path : 'dashboard', component: DashboardComponent},
       {path : 'sucursal', component: SucursalComponent},
       {path : 'user', component : UserComponent},
+      {path : 'csd', component : CsdComponent},
       {path: "", redirectTo: "/dashboard", pathMatch: "full" },
     ]
   },
