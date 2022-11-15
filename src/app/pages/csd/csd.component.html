@@ -1,26 +1,26 @@
 <div class="header-title mt-2">
   <h1 class="fw-bold fs-1">
-    SCD
+    SCD {{data.name}}
   </h1>
 </div>
 <div class="container">
     <form [formGroup]="form">
       <div class="d-flex flex-row">
-        <section class="col-6">
+        <section class="col-6 justify-content-center d-flex">
           <mat-form-field class="col-10" appearance="outline">
             <mat-label>Nombre sin regimen socitario</mat-label>
-            <input matInput formControlName="name"/>
+            <input matInput formControlName="nss"/>
           </mat-form-field>
         </section>
-        <section class="col-6">
+        <section class="col-6 justify-content-center d-flex">
           <mat-form-field class="col-10" appearance="outline">
             <mat-label>Contraseña CSD's</mat-label>
-            <input type="password" matInput formControlName="password"/>
+            <input type="password" matInput formControlName="csdPassword"/>
           </mat-form-field>
         </section>
       </div>
       <div class="d-flex flex-row">
-        <div class="col-6">
+        <div class="col-6 justify-content-center d-flex">
           <div class="container-file col-10">
             <div (click)="fileInputCer.click()">
               <div class="button-file fw-bold">
@@ -34,7 +34,7 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
+        <div class="col-6 justify-content-center d-flex">
           <div class="container-file col-10">
             <div (click)="fileInputKey.click()">
               <div class="button-file fw-bold">

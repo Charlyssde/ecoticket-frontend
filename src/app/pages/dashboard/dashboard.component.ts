@@ -121,6 +121,8 @@ export class DashboardComponent implements OnInit {
   }
 
   handleClickView(id : string) {
-    this.router.navigate(['/sucursal'], {queryParams : [id] })
+    this.router.navigate(['/sucursal'], { queryParams : {id : id} }).then((res) => {
+      console.log("S->", res)
+    })
   }
 }

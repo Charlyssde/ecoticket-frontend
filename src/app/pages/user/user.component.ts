@@ -93,8 +93,4 @@ export class UserComponent implements OnInit {
     });
   }
 
-  handleClickView(id : string) {
-    this.router.navigate(['/sucursal'], {queryParams : [id] })
-  }
-
 }

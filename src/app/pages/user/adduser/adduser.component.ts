@@ -4,6 +4,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CustomValidators} from "../../../utils/EqualityValidator";
+import { ActivatedRoute } from '@angular/router';
+import {StoresService} from "../../../services/stores.service";
 
 @Component({
   selector: 'app-adduser',
@@ -20,7 +22,9 @@ export class AdduserComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder : FormBuilder,
     private  UserService : UserService,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private storeService : StoresService,
+    private route : ActivatedRoute
 
   ) {
     this.form = formBuilder.group({
@@ -32,7 +36,7 @@ export class AdduserComponent implements OnInit {
       confirmPassword : new FormControl('', [Validators.required]),
       role : new FormControl('', [Validators.required]),
       permiso : new FormControl('', [Validators.required]),
-      sucursal : new FormControl(sessionStorage.getItem('id'))
+      sucursal : new FormControl('')
 
       }, {validator : CustomValidators.MatchValidator('password', 'confirmPassword')})
    }

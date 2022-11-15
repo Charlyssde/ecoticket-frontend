@@ -21,4 +21,7 @@ export class UserService {
   getUser () : Observable<any>{
     return this.http.get(environment.api + 'user');
   }
+  getuserbyid (id : string) : Observable<any>{
+    return this.http.get(environment.api + 'userid/' + id);
+  }
 }

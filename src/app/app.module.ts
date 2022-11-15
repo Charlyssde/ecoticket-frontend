@@ -56,7 +56,7 @@ import { AdduserComponent } from './pages/user/adduser/adduser.component';
     RestaurarContrasenaComponent,
     AddStoreComponent,
     ConfirmActionComponent,
-    AdduserComponent,
+    AdduserComponent
   ],
     imports: [
         BrowserModule,
