@@ -4,6 +4,11 @@ import {StoreModel} from "../../models/store-model";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
+import {StoresService} from "../../services/stores.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddStoreComponent} from "./add-store/add-store.component";
+import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -18,27 +23,56 @@ export class DashboardComponent implements OnInit {
   ];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  data : StoreModel[] = [
-    {id : '0', name : 'CCStores sucursal campo de tiro', rfc : '123456789988', generatedTickets : 500, generatedInvoices : 231},
-    {id : '1', name : 'CCStores sucursal centro', rfc : 'ASDHJUFYYY', generatedTickets : 500, generatedInvoices : 231},
-    {id : '2', name : 'CCStores sucursal americas', rfc : '1Q2W3E4R5T', generatedTickets : 500, generatedInvoices : 231},
-    {id : '3', name : 'CCStores sucursal crystal', rfc : 'QAWS34ER56', generatedTickets : 500, generatedInvoices : 231},
-    ]
+  data : StoreModel = {
+    cert: "",
+    csdPassword: "",
+    generatedInvoices: 0,
+    generatedTickets: 0,
+    id: "",
+    toPay : 0,
+    key: "",
+    name: "",
+    nss: "",
+    owner: "",
+    rfc: ""
+  };
 
   constructor(
     private _snackbar : MatSnackBar,
     private router : Router,
+    private storeService : StoresService,
+    private dialog : MatDialog
   ) {
     this.datasource = new MatTableDataSource<StoreModel>();
   }
 
   ngOnInit(): void {
-    this.datasource = new MatTableDataSource<StoreModel>(this.data);
-    this.datasource.paginator = this.paginator;
+    this.loadStores();
+  }
+
+  loadStores() {
+    const id = sessionStorage.getItem('id');
+    if(id !== null){
+      this.storeService.getAllStores(id).subscribe((data) => {
+        this.data = data[0];
+        this.datasource = new MatTableDataSource<StoreModel>(data);
+        this.datasource.paginator = this.paginator;
+      })
+    }
   }
 
   addNewStore() {
-
+    let dialogRef = this.dialog.open(AddStoreComponent, {
+      panelClass : 'my-dialog-container',
+      width : '600px',
+      height : '385px',
+      data : {action : 'Agregar'}
+    })
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.loadStores();
+      }
+    })
   }
 
   handleClickToken() {
@@ -50,11 +84,40 @@ export class DashboardComponent implements OnInit {
   }
 
   handleClickEdit(element : StoreModel) {
-
+    let dialogRef = this.dialog.open(AddStoreComponent, {
+      panelClass : 'my-dialog-container',
+      width : '600px',
+      height : '385px',
+      data : {action : 'Editar', data : element}
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.loadStores();
+      }
+    })
   }
 
   handleClickDelete(id : string) {
-
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      panelClass : 'my-dialog-container',
+      width : '500px',
+      height : '173px',
+      data : {action : 'Eliminar'}
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.storeService.deleteStore(id).subscribe((resp) => {
+          this.loadStores();
+          this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
+            duration : 3000,
+          });
+        }, ({error}) => {
+            this._snackbar.open(error.message, '', {
+              duration: 3000
+            })
+        })
+      }
+    })
   }
 
   handleClickView(id : string) {

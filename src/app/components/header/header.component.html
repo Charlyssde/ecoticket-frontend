@@ -22,7 +22,7 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-toolbar-row class="mb-2">
-    <div class="logo"></div>
+    <div  (click)="handleClickLogo()" class="logo"></div>
     <menu class="info-navbar">
       <button *ngIf="handlePermissions()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">description</mat-icon>

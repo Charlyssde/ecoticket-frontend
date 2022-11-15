@@ -37,6 +37,8 @@ import { RoleComponent } from './components/role/role.component';
 import { UserSaveComponent } from './components/user-save/user-save.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/restaurar-contrasena.component';
+import { AddStoreComponent } from './pages/dashboard/add-store/add-store.component';
+import { ConfirmActionComponent } from './components/confirm-action/confirm-action.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/
     RoleComponent,
     UserSaveComponent,
     UserEditComponent,
-    RestaurarContrasenaComponent
+    RestaurarContrasenaComponent,
+    AddStoreComponent,
+    ConfirmActionComponent
   ],
     imports: [
         BrowserModule,
