@@ -32,15 +32,11 @@ export class HeaderComponent implements OnInit {
   }
 
   handlePermissions() : boolean {
-    return this.router.url.includes( '/sucursal?')
+    return this.router.url.includes( '?')
   }
 
   handleClickUsers() {
-    this.route.queryParams.subscribe((params) => {
-      console.log(params)
-      this.router.navigate(['/user'], {queryParams : params})
-    });
-
+    this.router.navigate(['/user'], {queryParamsHandling: "preserve"})
   }
 
   handleClickLogo() {
@@ -48,9 +44,6 @@ export class HeaderComponent implements OnInit {
   }
 
   handleClickCsd() {
-    this.route.queryParams.subscribe((params) => {
-      console.log(params)
-      this.router.navigate(['/csd'], {queryParams : params})
-    });
+    this.router.navigate(['/csd'], {queryParamsHandling : "preserve"})
   }
 }

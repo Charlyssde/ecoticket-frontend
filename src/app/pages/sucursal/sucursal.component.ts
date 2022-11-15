@@ -36,10 +36,9 @@ export class SucursalComponent implements OnInit {
     private storeService : StoresService
   ) {
     this.route.queryParams.subscribe((params) => {
-      this.id = params[0]
+      this.id = params['id']
       this.storeService.getStore(this.id).subscribe((data) => {
         this.data = data;
-        this.title = this.data.name;
       });
     });
 
