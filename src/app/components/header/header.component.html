@@ -24,8 +24,8 @@
   <mat-toolbar-row class="mb-2">
     <div  (click)="handleClickLogo()" class="logo"></div>
     <menu class="info-navbar">
-      <button *ngIf="handlePermissions()" mat-raised-button>
-        <mat-icon (click)="handleClickCsd()" class="fw-bold" color="primary">key</mat-icon>
+      <button (click)="handleClickCsd()" *ngIf="handlePermissions()" mat-raised-button>
+        <mat-icon class="fw-bold" color="primary">key</mat-icon>
         <span class="fw-bold" style="color: green">CSD</span>
       </button>
       <button *ngIf="handlePermissions()" mat-raised-button>
