@@ -32,6 +32,7 @@ export class UserComponent implements OnInit {
 
   newuser() {
     let dialogRef = this.dialog.open(UserSaveComponent,{
+      panelClass: 'my-dialog-container',
       width : '700px',
       height : 'auto'
     });
@@ -52,6 +53,7 @@ export class UserComponent implements OnInit {
 
   useredit(element : User) {
     let dialogRef = this.dialog.open(UserEditComponent,{
+      panelClass: 'my-dialog-container',
       width : '700px',
       height : 'auto'
     });
@@ -63,6 +65,7 @@ export class UserComponent implements OnInit {
 
   assigrole(element : User) {
     let dialogRef = this.dialog.open(RoleComponent,{
+      panelClass: 'my-dialog-container',
       width : '500px',
       height : 'auto'
     });
