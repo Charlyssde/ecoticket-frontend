@@ -32,6 +32,7 @@ export class AdduserComponent implements OnInit {
       confirmPassword : new FormControl('', [Validators.required]),
       role : new FormControl('', [Validators.required]),
       permiso : new FormControl('', [Validators.required]),
+      sucursal : new FormControl(sessionStorage.getItem('id'))
 
       }, {validator : CustomValidators.MatchValidator('password', 'confirmPassword')})
    }
