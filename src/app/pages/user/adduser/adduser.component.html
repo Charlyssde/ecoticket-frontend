@@ -1,7 +1,4 @@
-<span class mat-dialog-title>
-  <mat-icon>add</mat-icon>
-  Agregar Usuario</span>
-<div class="container">
+<span class mat-dialog-title> {{data.action}} Usuario</span>
   <section class="m-2 pb-3" mat-dialog-content>
   <form [formGroup]="form">
     <div class="d-flex flex-row">
@@ -68,8 +65,8 @@
         <section class="col-6">
           <mat-form-field class="col-10" appearance="outline">
             <mat-label>Rol</mat-label>
-            <input matInput formControlName="rol"/>
-            <mat-error *ngIf="this.form.controls['rol'].hasError('required')">
+            <input matInput formControlName="role"/>
+            <mat-error *ngIf="this.form.controls['role'].hasError('required')">
               El campo Rol es obligatorio
             </mat-error>
           </mat-form-field>
@@ -86,7 +83,6 @@
   </div>
   </form>
 </section>
-</div>
 <div class="actions" align="end" mat-dialog-actions>
   <button mat-dialog-close mat-raised-button>
     Cancelar
@@ -95,3 +91,4 @@
     Guardar
   </button>
 </div>
+
