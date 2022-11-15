@@ -34,6 +34,8 @@ import { SucursalComponent } from './pages/sucursal/sucursal.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { CsdComponent } from './components/csd/csd.component';
 import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/restaurar-contrasena.component';
+import { AddStoreComponent } from './pages/dashboard/add-store/add-store.component';
+import { ConfirmActionComponent } from './components/confirm-action/confirm-action.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/
     UserComponent,
     SucursalComponent,
     CsdComponent,
-    RestaurarContrasenaComponent
+    RestaurarContrasenaComponent,
+    AddStoreComponent,
+    ConfirmActionComponent
   ],
     imports: [
         BrowserModule,

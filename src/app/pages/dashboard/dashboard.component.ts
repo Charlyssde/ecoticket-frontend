@@ -5,6 +5,10 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {StoresService} from "../../services/stores.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddStoreComponent} from "./add-store/add-store.component";
+import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
+
 
 @Component({
   selector: 'app-dashboard',
@@ -37,11 +41,16 @@ export class DashboardComponent implements OnInit {
     private _snackbar : MatSnackBar,
     private router : Router,
     private storeService : StoresService,
+    private dialog : MatDialog
   ) {
     this.datasource = new MatTableDataSource<StoreModel>();
   }
 
   ngOnInit(): void {
+    this.loadStores();
+  }
+
+  loadStores() {
     const id = sessionStorage.getItem('id');
     if(id !== null){
       this.storeService.getAllStores(id).subscribe((data) => {
@@ -53,7 +62,17 @@ export class DashboardComponent implements OnInit {
   }
 
   addNewStore() {
-
+    let dialogRef = this.dialog.open(AddStoreComponent, {
+      panelClass : 'my-dialog-container',
+      width : '600px',
+      height : '385px',
+      data : {action : 'Agregar'}
+    })
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.loadStores();
+      }
+    })
   }
 
   handleClickToken() {
@@ -65,11 +84,40 @@ export class DashboardComponent implements OnInit {
   }
 
   handleClickEdit(element : StoreModel) {
-
+    let dialogRef = this.dialog.open(AddStoreComponent, {
+      panelClass : 'my-dialog-container',
+      width : '600px',
+      height : '385px',
+      data : {action : 'Editar', data : element}
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.loadStores();
+      }
+    })
   }
 
   handleClickDelete(id : string) {
-
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      panelClass : 'my-dialog-container',
+      width : '500px',
+      height : '173px',
+      data : {action : 'Eliminar'}
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.storeService.deleteStore(id).subscribe((resp) => {
+          this.loadStores();
+          this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
+            duration : 3000,
+          });
+        }, ({error}) => {
+            this._snackbar.open(error.message, '', {
+              duration: 3000
+            })
+        })
+      }
+    })
   }
 
   handleClickView(id : string) {

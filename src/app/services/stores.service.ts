@@ -17,6 +17,14 @@ export class StoresService {
     return this.http.post(environment.api + 'store/', data)
   }
 
+  updateStore (id : string, data : any) : Observable<any> {
+    return this.http.put(environment.api + 'store/' + id, data);
+  }
+
+  deleteStore (id : string) : Observable<any>{
+    return this.http.delete(environment.api + 'store/' + id)
+  }
+
   getAllStores (id : string) : Observable<any>{
     return this.http.get(environment.api + 'store/all/' + id);
   }

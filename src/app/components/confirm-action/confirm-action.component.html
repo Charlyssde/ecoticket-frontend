@@ -1,0 +1,8 @@
+<span class mat-dialog-title>Confirmación</span>
+<section class="pb-2 m-2" mat-dialog-content>
+¿Está seguro que desea {{data.action}} el registro seleccionado?
+</section>
+<div align="end" mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button (click)="handleClickPrimary()" color="primary">{{data.action}}</button>
+</div>
