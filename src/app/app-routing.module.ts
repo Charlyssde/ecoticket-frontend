@@ -8,6 +8,7 @@ import {PagesComponent} from "./pages/pages.component";
 import { UserComponent } from './pages/user/user.component';
 import {SucursalComponent} from "./pages/sucursal/sucursal.component";
 import {CsdComponent} from "./pages/csd/csd.component";
+import {RolesComponent} from "./pages/roles/roles.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path : 'sucursal', component: SucursalComponent},
       {path : 'user', component : UserComponent},
       {path : 'csd', component : CsdComponent},
+      {path : 'roles', component : RolesComponent},
       {path: "", redirectTo: "/dashboard", pathMatch: "full" },
     ]
   },

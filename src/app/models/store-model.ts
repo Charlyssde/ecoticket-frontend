@@ -6,7 +6,7 @@ export interface StoreModel{
   toPay : number;
   generatedTickets : number;
   generatedInvoices : number;
-  cert : string;
+  cer : string;
   key : string;
   nss : string;
   csdPassword : string;

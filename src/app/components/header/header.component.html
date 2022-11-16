@@ -22,7 +22,7 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-toolbar-row class="mb-2">
-    <div  (click)="handleClickLogo()" class="logo"></div>
+    <div (click)="handleClickLogo()" class="logo"></div>
     <menu class="info-navbar">
       <button (click)="handleClickCsd()" *ngIf="handlePermissions()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">key</mat-icon>
@@ -31,6 +31,10 @@
       <button *ngIf="handlePermissions()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">description</mat-icon>
         <span class="fw-bold" style="color: green">Reportes</span>
+      </button>
+      <button (click)="handleClickRoles()" *ngIf="handlePermissions()" mat-raised-button>
+        <mat-icon class="fw-bold" color="primary">security</mat-icon>
+        <span class="fw-bold" style="color: green">Roles</span>
       </button>
       <button (click)="handleClickUsers()" *ngIf="handlePermissions()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">people</mat-icon>

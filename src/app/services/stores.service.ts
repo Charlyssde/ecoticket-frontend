@@ -13,7 +13,7 @@ export class StoresService {
     private http : HttpClient
   ) { }
 
-  saveStore (data : any) : Observable<any> {
+  saveStore (data : StoreModel) : Observable<any> {
     return this.http.post(environment.api + 'store/', data)
   }
 

@@ -46,4 +46,8 @@ export class HeaderComponent implements OnInit {
   handleClickCsd() {
     this.router.navigate(['/csd'], {queryParamsHandling : "preserve"})
   }
+
+  handleClickRoles() {
+    this.router.navigate(['/roles'], {queryParamsHandling : "preserve"})
+  }
 }

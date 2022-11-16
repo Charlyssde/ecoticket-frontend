@@ -38,6 +38,7 @@ import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/
 import { AddStoreComponent } from './pages/dashboard/add-store/add-store.component';
 import { ConfirmActionComponent } from './components/confirm-action/confirm-action.component';
 import { AdduserComponent } from './pages/user/adduser/adduser.component';
+import { RolesComponent } from './pages/roles/roles.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AdduserComponent } from './pages/user/adduser/adduser.component';
     RestaurarContrasenaComponent,
     AddStoreComponent,
     ConfirmActionComponent,
-    AdduserComponent
+    AdduserComponent,
+    RolesComponent
   ],
     imports: [
         BrowserModule,
