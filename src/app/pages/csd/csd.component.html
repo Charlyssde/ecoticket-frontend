@@ -15,7 +15,10 @@
         <section class="col-6 justify-content-center d-flex">
           <mat-form-field class="col-10" appearance="outline">
             <mat-label>Contraseña CSD's</mat-label>
-            <input type="password" matInput formControlName="csdPassword"/>
+            <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="csdPassword"/>
+            <mat-icon matSuffix (click)="togglePasswordVisibility()">
+              {{showPassword ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
           </mat-form-field>
         </section>
       </div>

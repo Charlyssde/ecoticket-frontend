@@ -24,7 +24,14 @@ export class AddStoreComponent implements OnInit {
       name : new FormControl('', [Validators.required]),
       email : new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       rfc : new FormControl('', [Validators.required]),
-      owner : new FormControl(sessionStorage.getItem('id'))
+      owner : new FormControl(sessionStorage.getItem('id')),
+      toPay : new FormControl(0),
+      generatedTickets : new FormControl(0),
+      generatedInvoices : new FormControl(0),
+      nss : new FormControl(''),
+      csdPassword : new FormControl(''),
+      cer : new FormControl(''),
+      key : new FormControl(''),
     })
 
   }

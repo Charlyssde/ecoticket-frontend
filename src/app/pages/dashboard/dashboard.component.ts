@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   data : StoreModel = {
-    cert: "",
+    cer: "",
     csdPassword: "",
     generatedInvoices: 0,
     generatedTickets: 0,

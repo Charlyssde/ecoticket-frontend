@@ -3,6 +3,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {StoreModel} from "../../models/store-model";
 import {StoresService} from "../../services/stores.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-csd',
@@ -18,7 +20,7 @@ export class CsdComponent implements OnInit {
   fileKey! : File;
 
   data : StoreModel = {
-    cert: "",
+    cer: "",
     csdPassword: "",
     generatedInvoices: 0,
     generatedTickets: 0,
@@ -30,10 +32,14 @@ export class CsdComponent implements OnInit {
     rfc: "",
     toPay: 0
   };
+  showPassword: boolean = false;
+  id: string = '';
 
   constructor(
     private formBuilder : FormBuilder,
     private storeService : StoresService,
+    private _snackbar : MatSnackBar,
+    private fileService : FileService,
     private route : ActivatedRoute) {
     this.form = formBuilder.group({
       nss : new FormControl('', [Validators.required]),
@@ -45,13 +51,14 @@ export class CsdComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
+      this.id = params['id'];
       this.storeService.getStore(params['id']).subscribe((data) => {
         this.data = data;
         this.form.patchValue({
           nss : this.data.nss,
           csdPassword : this.data.csdPassword
         })
-        this.inputCer = this.data.cert;
+        this.inputCer = this.data.cer;
         this.inputKey = this.data.key;
       })
     })
@@ -69,5 +76,62 @@ export class CsdComponent implements OnInit {
 
   clickSaveScd() {
 
+    if(this.nothingChanges()){
+      this._snackbar.open('No hay cambios que realizar', '',{
+        duration : 2000
+      })
+    }else{
+      if(this.inputKey !== this.data.key){
+        let formData : FormData = new FormData();
+        formData.set('file', this.fileKey)
+        formData.set('collection', 'key')
+        formData.set('owner', this.id)
+        this.fileService.sendFile(formData).subscribe((res) => {
+          console.log("res->", res);
+          this._snackbar.open('Se ha guardado con éxito el archivo .key','',{
+            duration : 2000
+          })
+        }, error => {
+          console.log("error->", error);
+        })
+      }
+      if(this.inputCer !== this.data.cer){
+        let formData : FormData = new FormData();
+        formData.set('file', this.fileCer)
+        formData.set('collection', 'cer')
+        formData.set('owner', this.id)
+        this.fileService.sendFile(formData).subscribe((res) => {
+          console.log("res->", res);
+          this._snackbar.open('Se ha guardado con éxito el archivo .key','',{
+            duration : 2000
+          })
+        }, error => {
+          console.log("error->", error);
+        })
+      }
+      if(this.data.nss !== this.form.controls['nss'].value ||
+        this.data.csdPassword !== this.form.controls['csdPassword'].value){
+          this.data.nss = this.form.controls['nss'].value;
+          this.data.csdPassword = this.form.controls['csdPassword'].value;
+          this.storeService.updateStore(this.data.id, this.data).subscribe((res) => {
+            console.log("res->", res)
+            this._snackbar.open('Se han actualizado con éxito los valores modificados','',{
+
+            })
+          } , error => {
+            console.log("error->", error);
+          })
+      }
+    }
+  }
+
+  nothingChanges() {
+    return this.data.cer === this.inputCer && this.data.key === this.inputKey &&
+      this.data.nss === this.form.controls['nss'].value &&
+      this.data.csdPassword === this.form.controls['csdPassword'].value
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

@@ -13,7 +13,7 @@ import {StoresService} from "../../services/stores.service";
 export class SucursalComponent implements OnInit {
 
   data : StoreModel = {
-    cert: "",
+    cer: "",
     csdPassword: "",
     generatedInvoices: 0,
     generatedTickets: 0,
