@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {CustomValidators} from "../../../utils/EqualityValidator";
 import { ActivatedRoute } from '@angular/router';
 import {StoresService} from "../../../services/stores.service";
+import {StoreModel} from "../../../models/store-model";
 
 @Component({
   selector: 'app-adduser',
@@ -14,7 +15,20 @@ import {StoresService} from "../../../services/stores.service";
 })
 export class AdduserComponent implements OnInit {
 
-
+  data1 : StoreModel = {
+    cer: "",
+    csdPassword: "",
+    generatedInvoices: 0,
+    generatedTickets: 0,
+    id: "",
+    key: "",
+    name: "",
+    nss: "",
+    owner: "",
+    rfc: "",
+    toPay: 0
+  };
+    id: string = '';
     form : FormGroup;
 
   constructor(
@@ -32,26 +46,37 @@ export class AdduserComponent implements OnInit {
       username : new FormControl('', [Validators.required]),
       apellidouno : new FormControl('', [Validators.required]),
       apellidodos : new FormControl('',),
-      password : new FormControl('', [Validators.required]),
-      confirmPassword : new FormControl('',),
       role : new FormControl('', [Validators.required]),
-      permiso : new FormControl('', [Validators.required]),
-      sucursal : new FormControl('')
+      correo : new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
+      sucursal : new FormControl('',)
 
-      }, {validator : CustomValidators.MatchValidator('password', 'confirmPassword')})
+      })
    }
 
   ngOnInit(): void {
-
     if(this.data.action === 'Editar'){
       this.form.patchValue(this.data.data);
+      this.form.controls['username'].disable();
+      this.form.controls['correo'].disable();
+    }else{
+      this.cargar();
     }
+  }
+
+  cargar(){
+    this.route.queryParams.subscribe((params) => {
+      this.id = params['id'];
+      this.storeService.getStore(this.id).subscribe((response) => {
+        this.data1 = response;
+      })
+    })
   }
 
 
   clicksaveuser(){
     if(this.form.valid){
       if(this.data.action === 'Agregar'){
+        this.form.controls['sucursal'].setValue(this.data1.id);
         this.UserService.saveUser(this.form.value).subscribe((resp) => {
           this._snackbar.open('Se ha guardado correctamente el registro', '', {
             duration : 3000,

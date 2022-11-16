@@ -1,6 +1,6 @@
 import { UserService } from './../../services/user.service';
 import { Component, OnInit ,ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatPaginator} from "@angular/material/paginator";
 import { User } from './../../models/user';
 import {MatTableDataSource} from "@angular/material/table";
@@ -9,6 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import { RoleComponent } from 'src/app/components/role/role.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
+import {StoresService} from "../../services/stores.service";
+import {StoreModel} from "../../models/store-model";
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -18,7 +20,7 @@ export class UserComponent implements OnInit {
 
   datasource : MatTableDataSource<User>;
   displayedColumns : string[] = [
-    'Nombre','Usuario', 'Fecha','Asignar Rol','Acciones'
+    'Nombre','Usuario', 'Correo','Acciones'
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -37,12 +39,26 @@ export class UserComponent implements OnInit {
     password:"",
     apellidouno:"",
     apellidodos:"",
-    fecha:"",
+    correo:"",
     role:"",
     permiso:""
   };
 
+  data1 : StoreModel = {
+    cer: "",
+    csdPassword: "",
+    generatedInvoices: 0,
+    generatedTickets: 0,
+    id: "",
+    key: "",
+    name: "",
+    nss: "",
+    owner: "",
+    rfc: "",
+    toPay: 0
+  };
 
+  id: string = '';
   newuser() {
     let dialogRef = this.dialog.open(AdduserComponent,{
       panelClass: 'my-dialog-container',
@@ -61,8 +77,16 @@ export class UserComponent implements OnInit {
     private _snackbar : MatSnackBar,
     public router : Router,
     private dialog : MatDialog,
-    private UserService : UserService
+    private UserService : UserService,
+    private route : ActivatedRoute,
+    private storeService : StoresService,
   ) {
+    this.route.queryParams.subscribe((params) => {
+      this.id = params['id'];
+      this.storeService.getStore(this.id).subscribe((response) => {
+        this.data1 = response;
+      })
+    })
     this.datasource = new MatTableDataSource<User>();
   }
 
@@ -71,11 +95,15 @@ export class UserComponent implements OnInit {
   }
 
   userall(){
-    this.UserService.getUser().subscribe((data) => {
-      this.data = data[0];
-      this.datasource = new MatTableDataSource<User>(data);
-      this.datasource.paginator = this.paginator;
+    this.route.queryParams.subscribe((params) => {
+      this.id = params['id'];
+      this.UserService.getuserbyid(this.id).subscribe((data) => {
+        this.data = data[0];
+        this.datasource = new MatTableDataSource<User>(data);
+        this.datasource.paginator = this.paginator;
+      })
     })
+
   }
 
   useredit(element : User) {
