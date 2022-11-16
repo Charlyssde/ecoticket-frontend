@@ -33,7 +33,7 @@ export class AdduserComponent implements OnInit {
       apellidouno : new FormControl('', [Validators.required]),
       apellidodos : new FormControl('',),
       password : new FormControl('', [Validators.required]),
-      confirmPassword : new FormControl('', [Validators.required]),
+      confirmPassword : new FormControl('',),
       role : new FormControl('', [Validators.required]),
       permiso : new FormControl('', [Validators.required]),
       sucursal : new FormControl('')
@@ -42,10 +42,12 @@ export class AdduserComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
     if(this.data.action === 'Editar'){
       this.form.patchValue(this.data.data);
     }
   }
+
 
   clicksaveuser(){
     if(this.form.valid){

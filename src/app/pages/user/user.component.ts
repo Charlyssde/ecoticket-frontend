@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import { RoleComponent } from 'src/app/components/role/role.component';
 import { AdduserComponent } from './adduser/adduser.component';
+import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -48,7 +49,12 @@ export class UserComponent implements OnInit {
       width : '700px',
       height : 'auto',
       data : {action : 'Agregar'}
-    });
+    })
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.userall();
+      }
+    })
   }
 
   constructor(
@@ -78,11 +84,35 @@ export class UserComponent implements OnInit {
       width : '700px',
       height : 'auto',
       data : {action : 'Editar', data : element}
-    });
+    })
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.userall();
+      }
+    })
   }
 
   userdelete(id: string) {
-
+    let dialogRef = this.dialog.open(ConfirmActionComponent, {
+      panelClass : 'my-dialog-container',
+      width : '500px',
+      height : '173px',
+      data : {action : 'Eliminar'}
+    });
+    dialogRef.afterClosed().subscribe((data) => {
+      if(data.result){
+        this.UserService.deleteUser(id).subscribe((resp) => {
+          this.userall();
+          this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
+            duration : 3000,
+          });
+        }, ({error}) => {
+            this._snackbar.open(error.message, '', {
+              duration: 3000
+            })
+        })
+      }
+    })
   }
 
   assigrole(element : User) {

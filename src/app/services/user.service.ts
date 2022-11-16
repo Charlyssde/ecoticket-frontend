@@ -18,9 +18,14 @@ export class UserService {
     return this.http.put(environment.api + 'user/' + id, data);
   }
 
+  deleteUser (id : string) : Observable<any>{
+    return this.http.delete(environment.api + 'user/' + id)
+  }
+
   getUser () : Observable<any>{
     return this.http.get(environment.api + 'user');
   }
+
   getuserbyid (id : string) : Observable<any>{
     return this.http.get(environment.api + 'userid/' + id);
   }
