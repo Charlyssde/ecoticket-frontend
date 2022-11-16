@@ -32,7 +32,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import { SucursalComponent } from './pages/sucursal/sucursal.component';
 import {MatMenuModule} from "@angular/material/menu";
-import { RoleComponent } from './components/role/role.component';
+import { RoleComponent } from './pages/roles/role/role.component';
 import { CsdComponent } from './pages/csd/csd.component';
 import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/restaurar-contrasena.component';
 import { AddStoreComponent } from './pages/dashboard/add-store/add-store.component';

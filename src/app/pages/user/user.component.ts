@@ -6,7 +6,7 @@ import { User } from './../../models/user';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
-import { RoleComponent } from 'src/app/components/role/role.component';
+import { RoleComponent } from 'src/app/pages/roles/role/role.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
 @Component({

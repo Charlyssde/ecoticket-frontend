@@ -21,8 +21,8 @@ export class RolesService {
     return this.http.post(environment.api + 'role', data)
   }
 
-  updateRole(data : RolesModel) : Observable<any>{
-    return this.http.put(environment.api + 'role', data)
+  updateRole(id : string, data : RolesModel) : Observable<any>{
+    return this.http.put(environment.api + 'role/' + id, data)
   }
 
   deleteRole(id : string) : Observable<any>{
