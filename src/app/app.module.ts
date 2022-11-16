@@ -36,6 +36,7 @@ import { CsdComponent } from './pages/csd/csd.component';
 import { RestaurarContrasenaComponent } from './components/restaurar-contrasena/restaurar-contrasena.component';
 import { AddStoreComponent } from './pages/dashboard/add-store/add-store.component';
 import { ConfirmActionComponent } from './components/confirm-action/confirm-action.component';
+import { RolesComponent } from './pages/roles/roles.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ConfirmActionComponent } from './components/confirm-action/confirm-acti
     CsdComponent,
     RestaurarContrasenaComponent,
     AddStoreComponent,
-    ConfirmActionComponent
+    ConfirmActionComponent,
+    RolesComponent
   ],
     imports: [
         BrowserModule,

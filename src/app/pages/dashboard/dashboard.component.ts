@@ -54,7 +54,6 @@ export class DashboardComponent implements OnInit {
     const id = sessionStorage.getItem('id');
     if(id !== null){
       this.storeService.getAllStores(id).subscribe((data) => {
-        this.data = data[0];
         this.datasource = new MatTableDataSource<StoreModel>(data);
         this.datasource.paginator = this.paginator;
       })
@@ -121,8 +120,6 @@ export class DashboardComponent implements OnInit {
   }
 
   handleClickView(id : string) {
-    this.router.navigate(['/sucursal'], { queryParams : {id : id} }).then((res) => {
-      console.log("S->", res)
-    })
+    this.router.navigate(['/sucursal'], { queryParams : {id : id} });
   }
 }
