@@ -4,6 +4,7 @@ import {StoreModel} from "../../models/store-model";
 import {MatDialog} from "@angular/material/dialog";
 import {CsdComponent} from "../csd/csd.component";
 import {StoresService} from "../../services/stores.service";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-sucursal',
@@ -33,12 +34,15 @@ export class SucursalComponent implements OnInit {
     private route : ActivatedRoute,
     private router : Router,
     private dialog : MatDialog,
+    private loader : NgxUiLoaderService,
     private storeService : StoresService
   ) {
     this.route.queryParams.subscribe((params) => {
+      this.loader.start();
       this.id = params['id']
       this.storeService.getStore(this.id).subscribe((data) => {
         this.data = data;
+        this.loader.stop();
       });
     });
 

@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {StoresService} from "../../../services/stores.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-add-store',
@@ -18,6 +19,7 @@ export class AddStoreComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder : FormBuilder,
     private storeService : StoresService,
+    private loader : NgxUiLoaderService,
     private _snackbar : MatSnackBar
   ) {
     this.form = formBuilder.group({
@@ -44,24 +46,30 @@ export class AddStoreComponent implements OnInit {
 
   handleClickSave() {
     if(this.form.valid){
+      this.loader.start();
       if(this.data.action === 'Agregar'){
         this.storeService.saveStore(this.form.value).subscribe((resp) => {
           this._snackbar.open('Se ha guardado correctamente el registro', '', {
             duration : 3000,
           });
+          this.loader.stop();
           this.dialogRef.close({result : true})
         }, ({error}) => {
+          this.loader.stop();
           this._snackbar.open(error.message, '', {
             duration : 3000,
           })
         })
       }else{
+        this.loader.start();
         this.storeService.updateStore(this.data.data.id, this.form.value).subscribe((resp) => {
           this._snackbar.open('Se ha actualizado correctamente el registro', '', {
             duration : 3000,
           });
+          this.loader.stop();
           this.dialogRef.close({result : true})
         }, ({error}) => {
+          this.loader.stop();
           this._snackbar.open(error.message, '', {
             duration : 3000,
           })

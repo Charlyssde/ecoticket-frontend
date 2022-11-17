@@ -40,6 +40,26 @@ import { ConfirmActionComponent } from './components/confirm-action/confirm-acti
 import { AdduserComponent } from './pages/user/adduser/adduser.component';
 import { RolesComponent } from './pages/roles/roles.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import {NgxUiLoaderConfig, NgxUiLoaderModule} from 'ngx-ui-loader';
+
+
+const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
+    "blur": 1,
+    "delay": 0,
+    "fastFadeOut": true,
+    "fgsColor": "#229a1c",
+    "fgsPosition": "center-center",
+    "fgsSize": 80,
+    "fgsType": "wandering-cubes",
+    "gap": 24,
+    "masterLoaderId": "master",
+    "overlayBorderRadius": "0",
+    "overlayColor": "rgba(205,205,205,0.8)",
+    "pbColor": "red",
+    "pbDirection": "ltr",
+    "pbThickness": 3,
+    "hasProgressBar": false,
+  }
 
 @NgModule({
   declarations: [
@@ -83,7 +103,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
         MatCheckboxModule,
         MatTableModule,
         MatPaginatorModule,
-        MatMenuModule
+        MatMenuModule,
+        NgxUiLoaderModule.forRoot(ngxuiloaderconfiguration),
+        NgxUiLoaderModule,
     ],
   providers: [
     {

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MailService} from "../../services/mail.service";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-solicitud-pac',
@@ -17,11 +18,12 @@ export class SolicitudPacComponent implements OnInit {
     private mailService : MailService,
     private _snackbar : MatSnackBar,
     private formBuilder : FormBuilder,
+    private loader : NgxUiLoaderService,
     public dialogRef: MatDialogRef<SolicitudPacComponent>) {
     this.form = formBuilder.group({
-      name : new FormControl(''),
-      site : new FormControl(''),
-      phone : new FormControl(''),
+      name : new FormControl('', [Validators.required]),
+      site : new FormControl('', [Validators.required]),
+      phone : new FormControl('', [Validators.required]),
       extras : new FormControl('')
     })
   }
@@ -30,18 +32,26 @@ export class SolicitudPacComponent implements OnInit {
   }
 
   requestPac() {
+    if(!this.form.valid){
+      this._snackbar.open('Por favor complete todos los campos', '', {
+        duration : 2000
+      })
+      return;
+    }
+    this.loader.start();
     this.mailService.sendPacRquest(this.form.value).subscribe((resp) => {
-      console.log(resp)
       this._snackbar.open('Se ha enviado un correo electrónico con su solicitud', '', {
         duration: 3000,
         panelClass: 'error'
       });
+      this.loader.stop();
       this.dialogRef.close();
     }, error => {
       this._snackbar.open('Ha ocurrido un error al enviar el correo electrónico', '', {
         duration: 3000,
         panelClass: 'error'
       })
+      this.loader.stop();
       this.dialogRef.close()
     })
 

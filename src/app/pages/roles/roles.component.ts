@@ -10,6 +10,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {RoleComponent} from "./role/role.component";
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-roles',
@@ -41,13 +42,18 @@ export class RolesComponent implements OnInit {
     private rolesService : RolesService,
     private storeService : StoresService,
     private dialog : MatDialog,
+    private loader : NgxUiLoaderService,
     private _snackbar : MatSnackBar,
     private route : ActivatedRoute
   ) {
       this.route.queryParams.subscribe((params) => {
         this.id = params['id'];
+        this.loader.start();
         this.storeService.getStore(this.id).subscribe((response) => {
           this.data = response;
+          this.loader.stop();
+        }, error => {
+          this.loader.stop();
         })
       })
   }
@@ -57,11 +63,12 @@ export class RolesComponent implements OnInit {
   }
 
   loadAllRoles(){
+    this.loader.start();
     this.rolesService.getAllRoles(this.id).subscribe((response) => {
-      console.log(response)
       this.datasource = new MatTableDataSource<RolesModel>(response);
       this.datasource.paginator = this.paginator;
-    })
+      this.loader.stop();
+    }, error => this.loader.stop())
   }
 
   addNewRole() {
@@ -101,12 +108,15 @@ export class RolesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if(data.result){
+        this.loader.start();
         this.rolesService.deleteRole(id).subscribe((resp) => {
           this.loadAllRoles();
           this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
             duration : 3000,
           });
+          this.loader.stop();
         }, ({error}) => {
+          this.loader.stop();
           this._snackbar.open(error.message, '', {
             duration: 3000
           })

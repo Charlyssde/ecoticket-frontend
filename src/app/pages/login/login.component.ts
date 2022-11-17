@@ -6,6 +6,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {RestaurarContrasenaComponent} from "../../components/restaurar-contrasena/restaurar-contrasena.component";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private formBuilder : FormBuilder,
     private authService : AuthService,
     private _snackbar: MatSnackBar,
+    private loader : NgxUiLoaderService,
     private dialog : MatDialog) {
     this.form = formBuilder.group({
       username : new FormControl('', [Validators.required]),
@@ -53,26 +55,28 @@ export class LoginComponent implements OnInit {
       })
       return
     }
+    this.loader.start()
     let user : LoginModel = {
       username : this.form.controls['username'].value,
       password : this.form.controls['password'].value
     }
     this.authService.login(user).subscribe((resp) => {
-      if(resp && resp.error){
+      if (resp && resp.error) {
         const error = resp.error;
         this._snackbar.open(error, '', {
           duration: 3000,
           panelClass: 'error'
         })
+        this.loader.stop()
         return;
       }
       let username = sessionStorage.getItem('usuario')
-      this.router.navigate(['/dashboard'])
+      this.loader.stop()
       this._snackbar.open(`Bienvenido ${username}`, '', {
         duration: 3000,
         panelClass: 'green-snackbar'
       })
-    }, error => {
+      this.router.navigate(['/dashboard'])
 
     })
   }

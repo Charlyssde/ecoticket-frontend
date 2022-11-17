@@ -8,6 +8,7 @@ import {StoresService} from "../../services/stores.service";
 import {MatDialog} from "@angular/material/dialog";
 import {AddStoreComponent} from "./add-store/add-store.component";
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 
 @Component({
@@ -40,6 +41,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _snackbar : MatSnackBar,
     private router : Router,
+    private loader : NgxUiLoaderService,
     private storeService : StoresService,
     private dialog : MatDialog
   ) {
@@ -53,9 +55,11 @@ export class DashboardComponent implements OnInit {
   loadStores() {
     const id = sessionStorage.getItem('id');
     if(id !== null){
+      this.loader.start();
       this.storeService.getAllStores(id).subscribe((data) => {
         this.datasource = new MatTableDataSource<StoreModel>(data);
         this.datasource.paginator = this.paginator;
+        this.loader.stop();
       })
     }
   }
@@ -105,12 +109,14 @@ export class DashboardComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if(data.result){
+        this.loader.start();
         this.storeService.deleteStore(id).subscribe((resp) => {
           this.loadStores();
           this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
             duration : 3000,
           });
         }, ({error}) => {
+          this.loader.stop();
             this._snackbar.open(error.message, '', {
               duration: 3000
             })

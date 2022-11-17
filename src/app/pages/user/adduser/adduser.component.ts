@@ -8,6 +8,7 @@ import {RolesService} from "../../../services/roles.service";
 import { ActivatedRoute } from '@angular/router';
 import {StoresService} from "../../../services/stores.service";
 import {StoreModel} from "../../../models/store-model";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-adduser',
@@ -43,6 +44,7 @@ export class AdduserComponent implements OnInit {
     private _snackbar : MatSnackBar,
     private storeService : StoresService,
     private route : ActivatedRoute,
+    private loader : NgxUiLoaderService,
     private rolesService : RolesService,
 
   ) {
@@ -72,10 +74,12 @@ export class AdduserComponent implements OnInit {
 
   cargarstores(){
     this.route.queryParams.subscribe((params) => {
+      this.loader.start();
       this.id = params['id'];
       this.storeService.getStore(this.id).subscribe((response) => {
         this.data1 = response;
-      })
+        this.loader.stop();
+      }, error => this.loader.stop())
     })
   }
 
@@ -84,7 +88,6 @@ export class AdduserComponent implements OnInit {
       this.id = params['id'];
       this.rolesService.getAllRoles(this.id).subscribe((response) => {
         this.roles = response;
-        console.log("roleeeees", this.roles)
       })
     })
   }
@@ -92,14 +95,17 @@ export class AdduserComponent implements OnInit {
 
   clicksaveuser(){
     if(this.form.valid){
+      this.loader.start();
       if(this.data.action === 'Agregar'){
         this.form.controls['sucursal'].setValue(this.data1.id);
         this.UserService.saveUser(this.form.value).subscribe((resp) => {
           this._snackbar.open('Se ha guardado correctamente el registro', '', {
             duration : 3000,
           });
+          this.loader.stop();
           this.dialogRef.close({result : true})
         }, ({error}) => {
+          this.loader.stop();
           this._snackbar.open(error.message, '', {
             duration : 3000,
           })
@@ -109,8 +115,10 @@ export class AdduserComponent implements OnInit {
           this._snackbar.open('Se ha actualizado correctamente el registro', '', {
             duration : 3000,
           });
+          this.loader.stop();
           this.dialogRef.close({result : true})
         }, ({error}) => {
+          this.loader.stop();
           this._snackbar.open(error.message, '', {
             duration : 3000,
           })

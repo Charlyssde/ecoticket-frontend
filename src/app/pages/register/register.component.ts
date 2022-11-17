@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import {CustomValidators} from "../../utils/EqualityValidator";
 import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
 import { MailService } from 'src/app/services/mail.service';
+import {NgxUiLoaderService} from "ngx-ui-loader";
 
 @Component({
   selector: 'app-register',
@@ -39,6 +40,7 @@ export class RegisterComponent implements OnInit {
     public router : Router,
     private dialog: MatDialog,
     private authService : AuthService,
+    private loader : NgxUiLoaderService,
     private mailService : MailService) {
     this.form = formBuilder.group({
       commercialName : new FormControl('', [Validators.required]),
@@ -99,7 +101,7 @@ export class RegisterComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if(data.data){
-        console.log("Closed")
+        this.loader.start();
         this.authService.register(this.form.value).subscribe((resp) => {
           this.mailService.sendCondiciones({to : this.form.controls['email'].value}).subscribe(resp => {
             this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
@@ -108,13 +110,15 @@ export class RegisterComponent implements OnInit {
               horizontalPosition : 'end'
             })
           });
-          console.log("Response -> ", resp)
           let username = sessionStorage.getItem('usuario')
+          this.loader.stop();
           this.router.navigate(['/dashboard'])
           this._snackbar.open(`Bienvenido ${username}`, '', {
             duration: 3000,
             panelClass: 'green-snackbar'
           })
+        }, error => {
+          this.loader.stop();
         })
       }
     })

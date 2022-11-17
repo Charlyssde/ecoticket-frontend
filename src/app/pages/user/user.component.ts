@@ -11,6 +11,7 @@ import { AdduserComponent } from './adduser/adduser.component';
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
 import {StoresService} from "../../services/stores.service";
 import {StoreModel} from "../../models/store-model";
+import {NgxUiLoaderService} from "ngx-ui-loader";
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -24,13 +25,6 @@ export class UserComponent implements OnInit {
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  // data : User[] = [
-  //   {name : 'Benito López López', username: 'beno', activo:false, fecha: '11/11/2022', sucursal :'Centro', role:'Administrador'},
-  //   {name : 'Carlos Carrillo San Gabriel', username: 'cc', activo:true, fecha: '08/10/2022', sucursal :'Sayago', role:'Cajero'},
-  //   {name : 'Domingo DE Jesus Carrillo', username: 'djesus', activo:false, fecha: '06/03/2022', sucursal :'Lgos', role:'Cajero'},
-  //   {name : 'Enrique Sanchez Flores', username: 'esanchez', activo:true, fecha: '1/1/2022', sucursal :'Centro', role:'Ayudante'},
-  // ];
 
   data : User = {
     id: "",
@@ -80,13 +74,15 @@ export class UserComponent implements OnInit {
     private UserService : UserService,
     private route : ActivatedRoute,
     private storeService : StoresService,
+    private loader : NgxUiLoaderService,
   ) {
     this.route.queryParams.subscribe((params) => {
+      this.loader.start();
       this.id = params['id'];
       this.storeService.getStore(this.id).subscribe((response) => {
         this.data1 = response;
-        console.log("tiendassss",this.data1)
-      })
+        this.loader.stop();
+      }, error => this.loader.stop())
     })
     this.datasource = new MatTableDataSource<User>();
   }
@@ -97,12 +93,14 @@ export class UserComponent implements OnInit {
 
   userall(){
     this.route.queryParams.subscribe((params) => {
+      this.loader.start();
       this.id = params['id'];
       this.UserService.getuserbyid(this.id).subscribe((data) => {
         this.data = data[0];
         this.datasource = new MatTableDataSource<User>(data);
         this.datasource.paginator = this.paginator;
-      })
+        this.loader.stop();
+      }, error => this.loader.stop())
     })
 
   }
@@ -130,26 +128,20 @@ export class UserComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((data) => {
       if(data.result){
+        this.loader.start();
         this.UserService.deleteUser(id).subscribe((resp) => {
           this.userall();
           this._snackbar.open('Se ha eliminado exitósamente el registro', '',{
             duration : 3000,
           });
         }, ({error}) => {
+          this.loader.stop();
             this._snackbar.open(error.message, '', {
               duration: 3000
             })
         })
       }
     })
-  }
-
-  assigrole(element : User) {
-    let dialogRef = this.dialog.open(RoleComponent,{
-      panelClass: 'my-dialog-container',
-      width : '500px',
-      height : 'auto'
-    });
   }
 
 }
