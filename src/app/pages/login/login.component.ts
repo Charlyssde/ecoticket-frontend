@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       username : this.form.controls['username'].value,
       password : this.form.controls['password'].value
     }
-    this.authService.login(user).subscribe((resp) => {
+    this.authService.login(user).subscribe(async (resp) => {
       if (resp && resp.error) {
         const error = resp.error;
         this._snackbar.open(error, '', {
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         duration: 3000,
         panelClass: 'green-snackbar'
       })
-      this.router.navigate(['/dashboard'])
+      await this.router.navigate(['/dashboard'])
 
     })
   }

@@ -5,6 +5,10 @@ import {environment} from "../../environments/environment";
 import {catchError, Observable, tap} from "rxjs";
 import {Router} from "@angular/router";
 import jwt_decode from 'jwt-decode'
+import { getAuth, signInWithCustomToken } from "firebase/auth";
+import app from '../firebase-config'
+
+const auth = getAuth(app);
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +17,36 @@ export class AuthService {
 
   constructor(private http : HttpClient,  private router: Router) { }
 
+
   _usuario = {}
   token = {}
 
   public login(user : LoginModel) : Observable<any>{
     return this.http.post(environment.api + 'login', user).pipe(
-      tap((response: any) => {
+      tap(async(response: any) => {
         const result: any = jwt_decode(response.token)
-        sessionStorage.setItem('usuario', result.username)
-        sessionStorage.setItem('name', result.name)
-        sessionStorage.setItem('id', result.id)
-        sessionStorage.setItem('rol', result.rol)
-        sessionStorage.setItem('token', response.token)
+        await signInWithCustomToken(auth, response.token)
+          .then((userCredential : any) => {
+            const user = userCredential.user;
+            console.log("User->", user)
+            sessionStorage.setItem('usuario', result.claims.username)
+            sessionStorage.setItem('name', result.claims.name)
+            sessionStorage.setItem('id', result.claims.id)
+            sessionStorage.setItem('rol', result.claims.rol)
+            sessionStorage.setItem('token', user.accessToken);
 
-        this._usuario = {
-          username: result.username,
-          token: response.token,
-          permissions: result.rol
-        }
+            this._usuario = {
+              username: result.username,
+              token: response.token,
+              permissions: result.rol
+            }
 
-        sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+            sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+          })
+          .catch((error : any) => {
+            console.log("Error->", error)
+            // ...
+          });
       }),
       catchError(async (err) => err.error)
     )
@@ -40,21 +54,28 @@ export class AuthService {
 
   public register(data : any) : Observable<any> {
     return this.http.post(environment.api + 'register', data).pipe(
-      tap((response: any) => {
+      tap(async(response: any) => {
         const result: any = jwt_decode(response.token)
-        sessionStorage.setItem('usuario', result.username)
-        sessionStorage.setItem('name', result.name)
-        sessionStorage.setItem('id', result.id)
-        sessionStorage.setItem('rol', result.rol)
-        sessionStorage.setItem('token', response.token)
+        await signInWithCustomToken(auth, response.token)
+          .then((userCredential : any) => {
+            const user = userCredential.user;
+            sessionStorage.setItem('usuario', result.claims.username)
+            sessionStorage.setItem('name', result.claims.name)
+            sessionStorage.setItem('id', result.claims.id)
+            sessionStorage.setItem('rol', result.claims.rol)
+            sessionStorage.setItem('token', user.accessToken);
 
-        this._usuario = {
-          username: result.username,
-          token: response.token,
-          permissions: result.rol
-        }
+            this._usuario = {
+              username: result.username,
+              token: response.token,
+              permissions: result.rol
+            }
 
-        sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+            sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+          })
+          .catch((error : any) => {
+            console.log("Error->", error)
+          });
       }),
       catchError(async (err) => err.error)
     );
