@@ -28,11 +28,11 @@ export class AuthService {
         await signInWithCustomToken(auth, response.token)
           .then((userCredential : any) => {
             const user = userCredential.user;
-            console.log("User->", user)
             sessionStorage.setItem('usuario', result.claims.username)
             sessionStorage.setItem('name', result.claims.name)
             sessionStorage.setItem('id', result.claims.id)
-            sessionStorage.setItem('rol', result.claims.rol)
+            sessionStorage.setItem('authId', result.claims.authId)
+            sessionStorage.setItem('rol', result.claims.role)
             sessionStorage.setItem('token', user.accessToken);
 
             this._usuario = {
@@ -45,7 +45,6 @@ export class AuthService {
           })
           .catch((error : any) => {
             console.log("Error->", error)
-            // ...
           });
       }),
       catchError(async (err) => err.error)
@@ -62,7 +61,8 @@ export class AuthService {
             sessionStorage.setItem('usuario', result.claims.username)
             sessionStorage.setItem('name', result.claims.name)
             sessionStorage.setItem('id', result.claims.id)
-            sessionStorage.setItem('rol', result.claims.rol)
+            sessionStorage.setItem('authId', result.claims.authId)
+            sessionStorage.setItem('rol', result.claims.role)
             sessionStorage.setItem('token', user.accessToken);
 
             this._usuario = {
@@ -83,6 +83,12 @@ export class AuthService {
 
   public logout() {
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('usuario');
+    sessionStorage.removeItem('name');
+    sessionStorage.removeItem('id');
+    sessionStorage.removeItem('authId');
+    sessionStorage.removeItem('info-user');
+    sessionStorage.removeItem('rol');
     this.router.navigate(['/login']);
   }
 

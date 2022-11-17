@@ -70,14 +70,16 @@ export class LoginComponent implements OnInit {
         this.loader.stop()
         return;
       }
-      let username = sessionStorage.getItem('usuario')
-      this.loader.stop()
-      this._snackbar.open(`Bienvenido ${username}`, '', {
-        duration: 3000,
-        panelClass: 'green-snackbar'
-      })
-      await this.router.navigate(['/dashboard'])
 
+      setTimeout(() => {
+        let username = sessionStorage.getItem('usuario')
+        this._snackbar.open(`Bienvenido ${username}`, '', {
+          duration: 3000,
+          panelClass: 'green-snackbar'
+        })
+        this.loader.stop()
+        this.router.navigate(['/dashboard'])
+      }, 1000)
     })
   }
 
