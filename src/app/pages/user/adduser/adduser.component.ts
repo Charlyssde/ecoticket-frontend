@@ -1,9 +1,10 @@
 import { UserService } from './../../../services/user.service';
 import { Component,Inject, OnInit } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {RolesModel} from "../../../models/roles-model";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CustomValidators} from "../../../utils/EqualityValidator";
+import {RolesService} from "../../../services/roles.service";
 import { ActivatedRoute } from '@angular/router';
 import {StoresService} from "../../../services/stores.service";
 import {StoreModel} from "../../../models/store-model";
@@ -28,6 +29,9 @@ export class AdduserComponent implements OnInit {
     rfc: "",
     toPay: 0
   };
+
+  roles : any
+
     id: string = '';
     form : FormGroup;
 
@@ -38,7 +42,8 @@ export class AdduserComponent implements OnInit {
     private  UserService : UserService,
     private _snackbar : MatSnackBar,
     private storeService : StoresService,
-    private route : ActivatedRoute
+    private route : ActivatedRoute,
+    private rolesService : RolesService,
 
   ) {
     this.form = formBuilder.group({
@@ -46,7 +51,7 @@ export class AdduserComponent implements OnInit {
       username : new FormControl('', [Validators.required]),
       apellidouno : new FormControl('', [Validators.required]),
       apellidodos : new FormControl('',),
-      role : new FormControl('', [Validators.required]),
+      role : new FormControl('',),
       correo : new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       sucursal : new FormControl('',)
 
@@ -54,20 +59,32 @@ export class AdduserComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.cargarrole();
+
     if(this.data.action === 'Editar'){
       this.form.patchValue(this.data.data);
       this.form.controls['username'].disable();
       this.form.controls['correo'].disable();
     }else{
-      this.cargar();
+      this.cargarstores();
     }
   }
 
-  cargar(){
+  cargarstores(){
     this.route.queryParams.subscribe((params) => {
       this.id = params['id'];
       this.storeService.getStore(this.id).subscribe((response) => {
         this.data1 = response;
+      })
+    })
+  }
+
+  cargarrole(){
+    this.route.queryParams.subscribe((params) => {
+      this.id = params['id'];
+      this.rolesService.getAllRoles(this.id).subscribe((response) => {
+        this.roles = response;
+        console.log("roleeeees", this.roles)
       })
     })
   }

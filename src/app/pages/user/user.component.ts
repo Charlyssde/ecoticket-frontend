@@ -85,6 +85,7 @@ export class UserComponent implements OnInit {
       this.id = params['id'];
       this.storeService.getStore(this.id).subscribe((response) => {
         this.data1 = response;
+        console.log("tiendassss",this.data1)
       })
     })
     this.datasource = new MatTableDataSource<User>();

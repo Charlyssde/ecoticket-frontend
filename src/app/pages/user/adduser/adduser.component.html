@@ -43,7 +43,11 @@
       <section class="col-6">
         <mat-form-field class="col-10" appearance="outline">
           <mat-label>Rol</mat-label>
-          <input matInput formControlName="role"/>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let arc of roles" [value]="arc.id">
+              {{ arc.nombre }}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="this.form.controls['role'].hasError('required')">
             El campo Rol es obligatorio
           </mat-error>
@@ -55,6 +59,9 @@
           <input matInput formControlName="correo"/>
           <mat-error *ngIf="this.form.controls['correo'].hasError('required')">
             El campo Correo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="this.form.controls['correo'].hasError('pattern')">
+            El formato de correo electrónico no es el correcto
           </mat-error>
         </mat-form-field>
       </section>
