@@ -1,0 +1,11 @@
+<span class mat-dialog-title>Token</span>
+<section class="m-2 pb-2" mat-dialog-content>
+  <mat-form-field appearance="outline" class="col-12" >
+    <mat-label>Token</mat-label>
+    <input [value]="this.value" disabled matInput />
+    <mat-icon (click)="paste()" matSuffix color="primary">content_copy</mat-icon>
+  </mat-form-field>
+</section>
+<div class="actions" align="end" mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Regresar</button>
+</div>

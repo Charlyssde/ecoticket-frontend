@@ -41,6 +41,7 @@ import { AdduserComponent } from './pages/user/adduser/adduser.component';
 import { RolesComponent } from './pages/roles/roles.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule} from 'ngx-ui-loader';
+import { ModalTokenComponent } from './components/modal-token/modal-token.component';
 
 
 const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
@@ -80,7 +81,8 @@ const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
     ConfirmActionComponent,
     AdduserComponent,
     RolesComponent,
-    ProfileComponent
+    ProfileComponent,
+    ModalTokenComponent
   ],
     imports: [
         BrowserModule,
