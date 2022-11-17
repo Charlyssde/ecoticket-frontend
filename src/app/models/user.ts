@@ -7,5 +7,5 @@ export interface User {
   password:string,
   permiso:string
   role:string,
-  fecha:string
+  correo:string
 }

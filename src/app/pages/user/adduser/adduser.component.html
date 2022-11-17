@@ -39,49 +39,33 @@
         </section>
 
     </div>
-    <div class="d-flex flex-row" *ngIf="data.action.includes('Agregar')">
+    <div class="d-flex flex-row">
       <section class="col-6">
         <mat-form-field class="col-10" appearance="outline">
-          <mat-label>Contraseña</mat-label>
-          <input  type="password" matInput formControlName="password"/>
-          <mat-error *ngIf="this.form.controls['password'].hasError('required')">
-            El campo Contraseña es obligatorio
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor="let arc of roles" [value]="arc.id">
+              {{ arc.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="this.form.controls['role'].hasError('required')">
+            El campo Rol es obligatorio
           </mat-error>
         </mat-form-field>
       </section>
-        <section class="col-6">
-          <mat-form-field class="col-10" appearance="outline">
-            <mat-label>Contraseña de nuevo</mat-label>
-            <input type="password" matInput formControlName="confirmPassword"/>
-            <mat-error *ngIf="this.form.controls['confirmPassword'].errors?.['confirmedValidator']">
-              Las contraseñas no coinciden
-            </mat-error>
-            <mat-error *ngIf="this.form.controls['confirmPassword'].hasError('required')">
-              El campo Contraseña de nuevo es obligatorio
-            </mat-error>
-          </mat-form-field>
-        </section>
+      <section class="col-6">
+        <mat-form-field class="col-10" appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input matInput formControlName="correo"/>
+          <mat-error *ngIf="this.form.controls['correo'].hasError('required')">
+            El campo Correo es obligatorio
+          </mat-error>
+          <mat-error *ngIf="this.form.controls['correo'].hasError('pattern')">
+            El formato de correo electrónico no es el correcto
+          </mat-error>
+        </mat-form-field>
+      </section>
     </div>
-    <div class="d-flex flex-row">
-        <section class="col-6">
-          <mat-form-field class="col-10" appearance="outline">
-            <mat-label>Rol</mat-label>
-            <input matInput formControlName="role"/>
-            <mat-error *ngIf="this.form.controls['role'].hasError('required')">
-              El campo Rol es obligatorio
-            </mat-error>
-          </mat-form-field>
-        </section>
-        <section class="col-6">
-          <mat-form-field class="col-10" appearance="outline">
-            <mat-label>Permiso</mat-label>
-            <input matInput formControlName="permiso"/>
-            <mat-error *ngIf="this.form.controls['permiso'].hasError('required')">
-              El campo Permisos es obligatorio
-            </mat-error>
-          </mat-form-field>
-        </section>
-  </div>
   </form>
 </section>
 <div class="actions" align="end" mat-dialog-actions>

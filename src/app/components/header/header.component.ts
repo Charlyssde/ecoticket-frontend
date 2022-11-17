@@ -50,4 +50,8 @@ export class HeaderComponent implements OnInit {
   handleClickRoles() {
     this.router.navigate(['/roles'], {queryParamsHandling : "preserve"})
   }
+
+  handleClickadduser() {
+    this.router.navigate(['/adduser'], {queryParamsHandling : "preserve"})
+  }
 }
