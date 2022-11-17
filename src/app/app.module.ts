@@ -39,6 +39,7 @@ import { AddStoreComponent } from './pages/dashboard/add-store/add-store.compone
 import { ConfirmActionComponent } from './components/confirm-action/confirm-action.component';
 import { AdduserComponent } from './pages/user/adduser/adduser.component';
 import { RolesComponent } from './pages/roles/roles.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { RolesComponent } from './pages/roles/roles.component';
     AddStoreComponent,
     ConfirmActionComponent,
     AdduserComponent,
-    RolesComponent
+    RolesComponent,
+    ProfileComponent
   ],
     imports: [
         BrowserModule,

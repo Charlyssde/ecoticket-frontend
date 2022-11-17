@@ -1,0 +1,162 @@
+<div class="header-title mt-2">
+  <h1 class="fw-bold fs-1">
+    Mi perfil
+  </h1>
+</div>
+<div class="container mt-1 mb-3">
+  <form [formGroup]="form">
+    <section *ngIf="this.form.controls['role'].value !== '' && this.form.controls['role'].value === 'owner'" class="row">
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="col-11" >
+          <mat-label>Nombre comercial</mat-label>
+          <input matInput formControlName="commercialName">
+          <mat-error *ngIf="this.form.controls['commercialName'].hasError('required')">
+            El campo Nombre Comercial es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Persona</mat-label>
+          <mat-select formControlName="person">
+            <mat-option *ngFor=" let p of persons" [value]="p.value">
+              {{p.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Razón social</mat-label>
+          <input matInput formControlName="businessName">
+          <mat-error *ngIf="this.form.controls['businessName'].hasError('required')">
+            El campo Razón Social es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+          <mat-error *ngIf="this.form.controls['email'].hasError('required')">
+            El campo email es obligatorio
+          </mat-error>
+          <mat-error *ngIf="this.form.controls['email'].hasError('pattern')">
+            El formato de correo electrónico no es el correcto
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Usuario</mat-label>
+          <input [readonly]="true" matInput formControlName="username">
+          <mat-error *ngIf="this.form.controls['username'].hasError('required')">
+            El campo Username es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+        <h3 class="col-md-6 text-success"> Servicios adicionales</h3>
+        <div class="col-md-6">
+          <mat-slide-toggle (change)="changeAdditionalServices($event)" formControlName="additionalServices" color="primary">Facturación</mat-slide-toggle>
+        </div>
+        <section style="margin-top: 10px" *ngIf="showAdditonal" >
+          <div class="row">
+            <div class="col-6">
+              <h3>¿Cuenta con algún servicio de facturación?</h3>
+            </div>
+            <div class="col-6" >
+              <mat-slide-toggle (change)="changeProvider($event)" formControlName="provider" color="primary">Sí</mat-slide-toggle>
+            </div>
+          </div>
+          <section class="row" *ngIf="showProvider">
+            <div class="col-lg-6">
+              <mat-form-field class="col-10" appearance="outline">
+                <mat-select formControlName="pac" >
+                  <mat-option *ngFor="let p of pacs" [value]="p.value">
+                    {{p.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-6">
+              <section class="row">
+                <h3 class="text-black">Proveedor autorizado de certificación</h3>
+                <div class="col-5">
+                  <mat-form-field appearance="outline" class="col-12">
+                    <mat-label>Usuario PAC</mat-label>
+                    <input matInput formControlName="userPac">
+                  </mat-form-field>
+                </div>
+                <div class="col-5">
+                  <mat-form-field appearance="outline" class="col-12">
+                    <mat-label>Contraseña PAC</mat-label>
+                    <input type="password" matInput formControlName="passwordPac">
+                  </mat-form-field>
+                </div>
+              </section>
+            </div>
+          </section>
+        </section>
+    </section>
+    <section *ngIf="this.form.controls['role'].value !== '' && this.form.controls['role'].value !== 'owner'" class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-11" >
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name">
+          <mat-error *ngIf="this.form.controls['name'].hasError('required')">
+            El campo Nombre Comercial es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Nombre de usuario</mat-label>
+          <input matInput formControlName="username">
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Primer apellido</mat-label>
+          <input matInput formControlName="apellidouno">
+          <mat-error *ngIf="this.form.controls['apellidouno'].hasError('required')">
+            El campo primer apellido es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="correo">
+          <mat-error *ngIf="this.form.controls['correo'].hasError('required')">
+            El campo email es obligatorio
+          </mat-error>
+          <mat-error *ngIf="this.form.controls['correo'].hasError('pattern')">
+            El formato de correo electrónico no es el correcto
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Segundo apellido</mat-label>
+          <input [readonly]="true" matInput formControlName="apellidodos">
+          <mat-error *ngIf="this.form.controls['apellidodos'].hasError('required')">
+            El campo Username es obligatorio
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="col-10" >
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="role">
+            <mat-option *ngFor=" let p of roles" [value]="p.id">
+              {{p.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
+    <div class="row centered-row">
+      <button class="col-6" color="primary" mat-raised-button (click)="clickSave()">Guardar</button>
+    </div>
+  </form>
+</div>

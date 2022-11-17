@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handleProfile() {
-
+    this.router.navigate(['/profile'], {queryParams : {profile : sessionStorage.getItem('id')}})
   }
 
   handleLogout() {
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   }
 
   handlePermissions() : boolean {
-    return this.router.url.includes( '?')
+    return this.router.url.includes( '?id')
   }
 
   handleClickUsers() {

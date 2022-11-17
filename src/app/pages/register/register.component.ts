@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
       username : new FormControl('', [Validators.required]),
       password : new FormControl('', [Validators.required]),
       confirmPassword : new FormControl('', [Validators.required]),
-      role : new FormControl('Administrador'),
+      role : new FormControl('owner'),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
       pac : new FormControl(0),
