@@ -8,6 +8,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {RolesModel} from "../../models/roles-model";
 import {RolesService} from "../../services/roles.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePasswordComponent} from "../../components/change-password/change-password.component";
 
 @Component({
   selector: 'app-profile',
@@ -42,7 +44,8 @@ export class ProfileComponent implements OnInit {
     private formBuilder : FormBuilder,
     private loader : NgxUiLoaderService,
     private rolesService : RolesService,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private dialog : MatDialog
   ) {
     this.form = formBuilder.group({
       role : ''
@@ -139,6 +142,14 @@ export class ProfileComponent implements OnInit {
     this.loader.start();
     this.userService.getProfile(value).subscribe((res) => {
       this.createForm(res);
+    })
+  }
+
+  restorePassword() {
+    this.dialog.open(ChangePasswordComponent, {
+      width : '600px',
+      height : '400px',
+      panelClass : 'my-dialog-container'
     })
   }
 }
