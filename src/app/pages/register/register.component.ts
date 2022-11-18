@@ -103,6 +103,13 @@ export class RegisterComponent implements OnInit {
       if(data.data){
         this.loader.start();
         this.authService.register(this.form.value).subscribe((resp) => {
+          if(resp && resp.message){
+            this._snackbar.open(resp.message, '', {
+              duration: 3000,
+            })
+            this.loader.stop();
+            return;
+          }
           this.mailService.sendCondiciones({to : this.form.controls['email'].value}).subscribe(resp => {
             this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
               duration : 2500,
@@ -110,15 +117,15 @@ export class RegisterComponent implements OnInit {
               horizontalPosition : 'end'
             })
           });
-          let username = sessionStorage.getItem('usuario')
-          this.loader.stop();
-          this.router.navigate(['/dashboard'])
-          this._snackbar.open(`Bienvenido ${username}`, '', {
-            duration: 3000,
-            panelClass: 'green-snackbar'
-          })
-        }, error => {
-          this.loader.stop();
+          setTimeout(() => {
+            let username = sessionStorage.getItem('usuario')
+            this.loader.stop();
+            this._snackbar.open(`Bienvenido ${username}`, '', {
+              duration: 3000,
+              panelClass: 'green-snackbar'
+            })
+            this.router.navigate(['/dashboard'])
+          }, 1000)
         })
       }
     })

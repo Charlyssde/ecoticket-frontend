@@ -9,6 +9,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {AddStoreComponent} from "./add-store/add-store.component";
 import {ConfirmActionComponent} from "../../components/confirm-action/confirm-action.component";
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import {ModalTokenComponent} from "../../components/modal-token/modal-token.component";
 
 
 @Component({
@@ -79,11 +80,11 @@ export class DashboardComponent implements OnInit {
   }
 
   handleClickToken() {
-    navigator.clipboard.writeText('some random token has been copied! :)').then(() => {
-      this._snackbar.open('Se ha copiado el token al portapapeles', '', {
-        duration : 3000
-      })
-    });
+    this.dialog.open(ModalTokenComponent,{
+      width : '500px',
+      height : '230px',
+      panelClass : 'my-dialog-container'
+    })
   }
 
   handleClickEdit(element : StoreModel) {
