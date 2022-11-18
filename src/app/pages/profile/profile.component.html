@@ -4,8 +4,10 @@
   </h1>
 </div>
 <div class="container mt-1 mb-3">
-  <div class="d-flex flex-row-reverse">
-    <button (click)="restorePassword()" class="col-sm-2 mt-1 mb-2" color="accent" mat-raised-button>Restaurar contraseña</button>
+  <div class="d-flex">
+    <div class="d-flex flex-row-reverse col-11 mb-2">
+      <button (click)="restorePassword()" class="col-sm-2 mt-1 mb-2" color="accent" mat-raised-button>Restaurar contraseña</button>
+    </div>
   </div>
   <form [formGroup]="form">
     <section *ngIf="this.form.controls['role'].value !== '' && this.form.controls['role'].value === 'owner'" class="row">
@@ -159,7 +161,7 @@
       </div>
     </section>
     <div class="row centered-row">
-      <button class="col-sm-6" color="primary" mat-raised-button (click)="clickSave()">Guardar</button>
+      <button class="col-sm-4" color="primary" mat-raised-button (click)="clickSave()">Guardar</button>
     </div>
   </form>
 </div>
