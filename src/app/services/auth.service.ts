@@ -101,4 +101,8 @@ export class AuthService {
     return this.isLoggedIn() ? sessionStorage.getItem('token') : null;
   }
 
+  public updatePassword(id : string, data : any) : Observable<any>{
+    return this.http.post('newpassword/' + id, data);
+  }
+
 }

@@ -148,7 +148,7 @@ export class ProfileComponent implements OnInit {
   restorePassword() {
     this.dialog.open(ChangePasswordComponent, {
       width : '600px',
-      height : '400px',
+      height : '385px',
       panelClass : 'my-dialog-container'
     })
   }
