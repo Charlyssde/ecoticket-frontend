@@ -57,7 +57,6 @@ export class ChangePasswordComponent implements OnInit {
       })
       this.dialogRef.close();
     }, error => {
-      console.log("Error->", error);
       this.loader.stop()
       this._snackbar.open('Ha ocurrido un error', '', {
         duration : 3000
