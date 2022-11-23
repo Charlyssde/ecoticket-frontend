@@ -6,16 +6,15 @@
       <div class="row">
         <h2>Acceso</h2>
       </div>
-      <div class="row">
         <form [formGroup]="form" >
           <div class="row">
-            <div class="col-10">
+            <div class="col-12">
               <mat-form-field appearance="outline" class="col-12">
                 <mat-label>Usuario</mat-label>
                 <input matInput formControlName="username">
               </mat-form-field>
             </div>
-            <div class="col-10">
+            <div class="col-12">
               <mat-form-field appearance="outline" class="col-12">
                 <mat-label>Contraseña</mat-label>
                 <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password">
@@ -23,20 +22,22 @@
                   {{showPassword?'visibility_off':'visibility'}}
                 </mat-icon>
               </mat-form-field>
-              <div class="row mb-3" >
-                <p class="link col-12" (click)="clickForgotMyPassword()">Olvidé mi contraseña</p>
+              <div class="d-flex flex-row-reverse col-12 mb-3" >
+                <p class="link" (click)="clickForgotMyPassword()">Olvidé mi contraseña</p>
               </div>
             </div>
-            <div class="row centered-row">
+            <div class="col-12 d-flex flex-row justify-content-center">
               <button class="col-6" mat-raised-button color="primary" (click)="clickLogin()">
                 Ingresar
               </button>
             </div>
           </div>
         </form>
+      <div class="d-flex flex-row col-12 justify-content-center mb-2 mt-2">
+        <h5 class="col-6 text-center">¿Aún no tienes una cuenta? Regístrate <a class="link" (click)="clickRegister()"> aquí</a> </h5>
       </div>
-      <div class="row centered-row mt-5">
-        <h5 class="col-6">¿Aún no tienes una cuenta? Regístrate <a class="link" (click)="clickRegister()"> aquí</a> </h5>
+      <div class="mt-3 col-12 d-flex justify-content-center">
+        <button (click)="clickFacturador()" mat-raised-button class="col-8">Quiero facturar un ticket</button>
       </div>
     </div>
 </div>

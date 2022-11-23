@@ -10,6 +10,7 @@ import {SucursalComponent} from "./pages/sucursal/sucursal.component";
 import {CsdComponent} from "./pages/csd/csd.component";
 import {RolesComponent} from "./pages/roles/roles.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
+import {FacturadorComponent} from "./pages/facturador/facturador.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
       {path: "", redirectTo: "/dashboard", pathMatch: "full" },
     ]
   },
+  {path : 'ticket', component : FacturadorComponent},
   {path: "", redirectTo: "/login", pathMatch: "full" },
   {path: 'login', component: LoginComponent},
   {path : 'register', component : RegisterComponent},

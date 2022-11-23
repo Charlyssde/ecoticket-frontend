@@ -44,6 +44,7 @@ import {NgxUiLoaderConfig, NgxUiLoaderModule} from 'ngx-ui-loader';
 import { ModalTokenComponent } from './components/modal-token/modal-token.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { PermissionsRuleDirective } from './directive/permissions-rule.directive';
+import { FacturadorComponent } from './pages/facturador/facturador.component';
 
 
 const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
@@ -86,7 +87,8 @@ const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
     ProfileComponent,
     ModalTokenComponent,
     ChangePasswordComponent,
-    PermissionsRuleDirective
+    PermissionsRuleDirective,
+    FacturadorComponent
   ],
     imports: [
         BrowserModule,

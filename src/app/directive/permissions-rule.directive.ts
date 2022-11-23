@@ -1,5 +1,4 @@
 import {Directive, Input, OnInit, Renderer2, TemplateRef, ViewContainerRef} from '@angular/core';
-import {PermissionService} from "../services/permission.service";
 
 @Directive({
   selector: '[permissionsRuleDirective]'

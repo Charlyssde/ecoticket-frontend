@@ -91,4 +91,8 @@ export class LoginComponent implements OnInit {
   clickRegister() {
     this.router.navigate(['/register'])
   }
+
+  clickFacturador() {
+    this.router.navigate(['/ticket'])
+  }
 }
