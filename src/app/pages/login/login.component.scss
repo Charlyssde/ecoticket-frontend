@@ -1,5 +1,63 @@
-h5{
-  font-weight: lighter;
-  font-size: .7rem;
-  color: slategray;
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
+
+
+.izquierda{
+  background: rgb(99,204,8);
+  background: linear-gradient(90deg, rgba(99,204,8,1) 0%, rgba(44,108,14,1) 100%);
+}
+
+.logoeco{
+
+  height: 200px;
+  margin-top: 10%;
+}
+
+
+.mensaje h1{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 4rem;
+  color: #1C1C1C;
+}
+
+
+.mensaje h1 p{
+  font-family: Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #7b7676;
+  margin-top: 10px;
+}
+
+.recuperarpass{
+  text-align: right;
+}
+
+.recuperarpass:hover{
+  font-weight: bolder;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nuevacuenta{
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  margin-top: 50%;
+}
+
+
+.btn-default {
+  font-family: Helvetica, sans-serif;
+  margin-top: 10%;
+  font-size: 18px;
+  color: #FFF;
+  border: 2px solid #FFF;
+  border-radius: 40px;
+  background: transparent;
+  transition: all 0.3s ease 0s;
+}
+
+.btn-default:hover {
+  color: #FFF;
+  background: #235701;
+  border: 2px solid #8ACD5C;
 }
