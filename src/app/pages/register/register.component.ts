@@ -34,6 +34,9 @@ export class RegisterComponent implements OnInit {
   showProvider : boolean = false;
   showPassword : boolean = false;
 
+  fileCfdi! : File;
+  inputCfdi : string = '';
+
   constructor(
     private formBuilder : FormBuilder,
     private _snackbar : MatSnackBar,
@@ -51,6 +54,7 @@ export class RegisterComponent implements OnInit {
       password : new FormControl('', [Validators.required]),
       confirmPassword : new FormControl('', [Validators.required]),
       role : new FormControl('owner'),
+      cfdi : new FormControl(null),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
       pac : new FormControl(0),
@@ -131,4 +135,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  onCfdiSelected($event: any  ) {
+    this.fileCfdi = $event.target.files[0]
+    this.inputCfdi = $event.target.files[0].name
+  }
 }

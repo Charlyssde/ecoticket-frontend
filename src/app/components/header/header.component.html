@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <mat-toolbar-row class="toolbar-row mb-2">
+  <mat-toolbar-row class="toolbar-row">
     <div>
       {{this.username}}
     </div>
@@ -21,7 +21,7 @@
       </button>
     </mat-menu>
   </mat-toolbar-row>
-  <mat-toolbar-row class="mb-2">
+  <mat-toolbar-row class="p-2">
     <div (click)="handleClickLogo()" class="logo"></div>
     <menu class="info-navbar" *ngIf="showButtons()">
       <button *permissionsRuleDirective="['owner', 'puede_timbrar']" (click)="handleClickCsd()" mat-raised-button>
