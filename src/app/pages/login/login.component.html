@@ -1,4 +1,4 @@
-<div class="d-flex flex-nowrap" style="height: 100vh">
+<div class="d-flex flex-wrap" style="height: 100vh">
 
 
   <div class="col-lg-6 izquierda d-flex justify-content-center">
@@ -7,6 +7,8 @@
 <div class="nuevacuenta">
   <p>¿No tienes cuenta?</p>
   <button type="button" class="btn btn-default col-12" (click)="clickRegister()">Regístrate aquí</button>
+  <p class="mt-5">Si lo prefieres:</p>
+  <button type="button" class="btn btn-default col-12" (click)="clickFacturador()">Factura un ticket</button>
 </div>
 
 
@@ -66,9 +68,9 @@
           </div>
 
         </form>
-      <div class="mt-3 col-12 d-flex justify-content-center">
-        <button (click)="clickFacturador()" mat-raised-button class="col-8">Quiero facturar un ticket</button>
-      </div>
+      <!-- <div class="mt-3 col-12 d-flex justify-content-center">
+        <button  mat-raised-button class="col-8">Quiero facturar un ticket</button>
+      </div> -->
 
 
 
