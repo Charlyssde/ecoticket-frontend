@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
       cfdi : new FormControl(null),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
-      pac : new FormControl(0),
+      pac : new FormControl(''),
       userPac : new FormControl(''),
       passwordPac : new FormControl('')
     }, {validator : CustomValidators.MatchValidator('password', 'confirmPassword')})
@@ -67,6 +67,10 @@ export class RegisterComponent implements OnInit {
       this.pacs = data.map((d : any) => {
         return {value : d.key, name : d.display_name}
       })
+    }, error => {
+      this._snackbar.open('Ocurrió un error al intentar obtener los PACS de facturación. Por favor reintente más tarde', '', {
+        duration : 3000
+      });
     })
   }
 
