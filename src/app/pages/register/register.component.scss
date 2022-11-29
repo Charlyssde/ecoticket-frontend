@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500&display=swap');
 
 
+.itemlogo { grid-area: logo; }
 .item1 { grid-area: uno; }
 .item2 { grid-area: dos; }
 .item3 { grid-area: tres; }
@@ -9,7 +10,11 @@
 .item6 { grid-area: seis; }
 .item7 { grid-area: siete; }
 .item8 { grid-area: ocho; }
-.item9 { grid-area: nueve; }
+
+
+.itemlogo, .item1>h1{
+  text-align: center;
+}
 
 
 .contenedor {
@@ -17,35 +22,52 @@
   margin: 0;
   height: 100%;
   max-height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
 }
 
 
 .register{
   position: absolute;
-  top:50%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 300px;
-  max-width: 90%;
+  max-width: 100%;
+  // margin-top: 0.5%;
   background-color: #FFF;
-  display: grid;
-  // grid: auto;
   box-shadow: 0 0.75rem 2rem 0 rgba(0, 0, 0, .15);
+
+ }
+
+
+ .formulario{
+  display: grid;
   grid-template-areas:
+    'logo logo'
     'uno uno'
     'dos dos'
-    'tres tres'
-    'cuatro cinco'
+    'tres cuatro'
+    'cinco cinco'
     'seis seis'
     'siete siete'
-    'ocho ocho'
-    'nueve nueve';
+    'ocho ocho';
+    height: 100%;
+    max-height: 100%;
+   
  }
  
 
+ .formulario > div {
+  padding: 5px;
+}
+
+.item7 > div {
+  padding: 5px;
+}
+
+
+// .item7{
+//   border: 1px #f00 solid;
+// }
 
 // .mensaje h1{
 //     font-family: 'Fira Sans', sans-serif;
