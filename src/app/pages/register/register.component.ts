@@ -11,6 +11,7 @@ import {CustomValidators} from "../../utils/EqualityValidator";
 import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
 import { MailService } from 'src/app/services/mail.service';
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import {FacturacionService} from "../../services/facturacion.service";
 
 @Component({
   selector: 'app-register',
@@ -24,12 +25,7 @@ export class RegisterComponent implements OnInit {
     {value : 2, name : 'PERSONA MORAL'}
   ]
 
-  pacs : OptionModel[] = [
-    {value : 0, name : 'Pac 1'},
-    {value : 1, name : 'Pac 2'},
-    {value : 2, name : 'Pac 3'},
-    {value : 3, name : 'Pac 4'},
-  ]
+  pacs : OptionModel[] = []
   showAdditonal : boolean = false;
   showProvider : boolean = false;
   showPassword : boolean = false;
@@ -44,6 +40,7 @@ export class RegisterComponent implements OnInit {
     private dialog: MatDialog,
     private authService : AuthService,
     private loader : NgxUiLoaderService,
+    private ecoticketService : FacturacionService,
     private mailService : MailService) {
     this.form = formBuilder.group({
       commercialName : new FormControl('', [Validators.required]),
@@ -65,7 +62,13 @@ export class RegisterComponent implements OnInit {
 
   form : FormGroup;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.ecoticketService.getAllPacs().subscribe((data) => {
+      this.pacs = data.map((d : any) => {
+        return {value : d.key, name : d.display_name}
+      })
+    })
+  }
 
   changeAdditionalServices(event: MatSlideToggleChange) {
     this.showAdditonal = event.checked;

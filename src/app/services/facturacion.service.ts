@@ -10,8 +10,12 @@ export class FacturacionService {
 
   constructor(private http : HttpClient) { }
 
+  getAllPacs() : Observable<any>{
+    return this.http.get(environment.ecoticketApi + 'pacs');
+  }
+
   sendTicket(data : string) : Observable<any>{
-    return this.http.post(environment.apiFacturacion, data);
+    return this.http.post(environment.ecoticketApi, data);
   }
 
 }

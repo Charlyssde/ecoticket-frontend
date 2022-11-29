@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api : 'http://localhost:3000/',
-  apiFacturacion : '',
+  ecoticketApi : 'http://facturar.ecoticketapp.com/',
 };
 
 /*
