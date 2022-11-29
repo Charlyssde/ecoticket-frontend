@@ -42,6 +42,9 @@ import { RolesComponent } from './pages/roles/roles.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule} from 'ngx-ui-loader';
 import { ModalTokenComponent } from './components/modal-token/modal-token.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { PermissionsRuleDirective } from './directive/permissions-rule.directive';
+import { FacturadorComponent } from './pages/facturador/facturador.component';
 
 
 const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
@@ -82,7 +85,10 @@ const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
     AdduserComponent,
     RolesComponent,
     ProfileComponent,
-    ModalTokenComponent
+    ModalTokenComponent,
+    ChangePasswordComponent,
+    PermissionsRuleDirective,
+    FacturadorComponent
   ],
     imports: [
         BrowserModule,

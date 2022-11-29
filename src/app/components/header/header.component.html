@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <mat-toolbar-row class="toolbar-row mb-2">
+  <mat-toolbar-row class="toolbar-row">
     <div>
       {{this.username}}
     </div>
@@ -21,24 +21,24 @@
       </button>
     </mat-menu>
   </mat-toolbar-row>
-  <mat-toolbar-row class="mb-2">
+  <mat-toolbar-row class="p-2">
     <div (click)="handleClickLogo()" class="logo"></div>
-    <menu class="info-navbar">
-      <button (click)="handleClickCsd()" *ngIf="handlePermissions()" mat-raised-button>
+    <menu class="info-navbar" *ngIf="showButtons()">
+      <button *permissionsRuleDirective="['owner', 'puede_timbrar']" (click)="handleClickCsd()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">key</mat-icon>
-        <span class="fw-bold" style="color: green">CSD</span>
+        <span class="fw-bold col-md-1 d-md-inline d-none" style="color: green">CSD</span>
       </button>
-      <button *ngIf="handlePermissions()" mat-raised-button>
+      <button *permissionsRuleDirective="['owner','ve_reportes']" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">description</mat-icon>
-        <span class="fw-bold" style="color: green">Reportes</span>
+        <span class="fw-bold col-md-1 d-md-inline d-none" style="color: green">Reportes</span>
       </button>
-      <button (click)="handleClickRoles()" *ngIf="handlePermissions()" mat-raised-button>
+      <button *permissionsRuleDirective="['owner','agrega_usuarios']" (click)="handleClickRoles()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">security</mat-icon>
-        <span class="fw-bold" style="color: green">Roles</span>
+        <span class="fw-bold col-md-1 d-md-inline d-none" style="color: green">Roles</span>
       </button>
-      <button (click)="handleClickUsers()" *ngIf="handlePermissions()" mat-raised-button>
+      <button *permissionsRuleDirective="['owner','agrega_usuarios']" (click)="handleClickUsers()" mat-raised-button>
         <mat-icon class="fw-bold" color="primary">people</mat-icon>
-        <span class="fw-bold" style="color: green">Usuarios</span>
+        <span class="fw-bold col-md-1 d-md-inline d-none" style="color: green">Usuarios</span>
       </button>
     </menu>
   </mat-toolbar-row>

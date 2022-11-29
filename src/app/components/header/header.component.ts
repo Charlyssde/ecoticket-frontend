@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/roles'], {queryParamsHandling : "preserve"})
   }
 
-  handleClickadduser() {
-    this.router.navigate(['/adduser'], {queryParamsHandling : "preserve"})
+  showButtons() {
+    return !this.router.url.includes('dashboard') && !this.router.url.includes('profile');
   }
 }

@@ -72,18 +72,27 @@ export class LoginComponent implements OnInit {
       }
 
       setTimeout(() => {
-        let username = sessionStorage.getItem('usuario')
+        let username = sessionStorage.getItem('usuario');
+        let rol = sessionStorage.getItem('rol');
         this._snackbar.open(`Bienvenido ${username}`, '', {
           duration: 3000,
           panelClass: 'green-snackbar'
         })
         this.loader.stop()
-        this.router.navigate(['/dashboard'])
+        if(rol?.includes('owner')){
+          this.router.navigate(['/dashboard'])
+        }else{
+          this.router.navigate(["/sucursal"], {queryParams : {id : sessionStorage.getItem('sucursal')}})
+        }
       }, 1000)
     })
   }
 
   clickRegister() {
     this.router.navigate(['/register'])
+  }
+
+  clickFacturador() {
+    this.router.navigate(['/ticket'])
   }
 }

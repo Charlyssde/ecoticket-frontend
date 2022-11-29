@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
       data : {action : 'Agregar'}
     })
     dialogRef.afterClosed().subscribe((data) => {
-      if(data.result){
+      if(data && data.result){
         this.loadStores();
       }
     })
@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
       data : {action : 'Editar', data : element}
     });
     dialogRef.afterClosed().subscribe((data) => {
-      if(data.result){
+      if(data && data.result){
         this.loadStores();
       }
     })

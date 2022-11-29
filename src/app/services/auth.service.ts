@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import jwt_decode from 'jwt-decode'
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import app from '../firebase-config'
+import {PermissionService} from "./permission.service";
 
 const auth = getAuth(app);
 
@@ -15,7 +16,10 @@ const auth = getAuth(app);
 })
 export class AuthService {
 
-  constructor(private http : HttpClient,  private router: Router) { }
+  constructor(
+    private http : HttpClient,
+    private router: Router,
+    private permissionsService : PermissionService) { }
 
 
   _usuario = {}
@@ -34,14 +38,16 @@ export class AuthService {
             sessionStorage.setItem('authId', result.claims.authId)
             sessionStorage.setItem('rol', result.claims.role)
             sessionStorage.setItem('token', user.accessToken);
+            sessionStorage.setItem('sucursal', result.claims.sucursal);
 
             this._usuario = {
-              username: result.username,
+              username: result.claims.username,
               token: response.token,
-              permissions: result.rol
+              permissions: result.claims.role
             }
 
             sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+            this.permissionsService.emitChangeEvent(result.claims.rol);
           })
           .catch((error : any) => {
             console.log("Error->", error)
@@ -64,14 +70,15 @@ export class AuthService {
             sessionStorage.setItem('authId', result.claims.authId)
             sessionStorage.setItem('rol', result.claims.role)
             sessionStorage.setItem('token', user.accessToken);
-
+            sessionStorage.setItem('sucursal', result.claims.sucursal);
             this._usuario = {
-              username: result.username,
-              token: response.token,
-              permissions: result.rol
+              username: result.claims.username,
+              token: response.claims.token,
+              permissions: result.claims.role
             }
 
-            sessionStorage.setItem('info-user', JSON.stringify(this._usuario))
+            sessionStorage.setItem('info-user', JSON.stringify(this._usuario));
+            this.permissionsService.emitChangeEvent(result.claims.rol);
           })
           .catch((error : any) => {
             console.log("Error->", error)
@@ -99,6 +106,10 @@ export class AuthService {
 
   public getToken(): string | null {
     return this.isLoggedIn() ? sessionStorage.getItem('token') : null;
+  }
+
+  public updatePassword(id : string, data : any) : Observable<any>{
+    return this.http.post('newpassword/' + id, data);
   }
 
 }

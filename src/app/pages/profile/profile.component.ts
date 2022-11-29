@@ -7,6 +7,9 @@ import {MatSlideToggleChange} from "@angular/material/slide-toggle";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {RolesModel} from "../../models/roles-model";
 import {RolesService} from "../../services/roles.service";
+import {NgxUiLoaderService} from "ngx-ui-loader";
+import {MatDialog} from "@angular/material/dialog";
+import {ChangePasswordComponent} from "../../components/change-password/change-password.component";
 
 @Component({
   selector: 'app-profile',
@@ -39,16 +42,16 @@ export class ProfileComponent implements OnInit {
     private route : ActivatedRoute,
     private userService : UserService,
     private formBuilder : FormBuilder,
+    private loader : NgxUiLoaderService,
     private rolesService : RolesService,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private dialog : MatDialog
   ) {
     this.form = formBuilder.group({
       role : ''
     })
     this.route.queryParams.subscribe((params) => {
-      this.userService.getProfile(params['profile']).subscribe((res) => {
-        this.createForm(res);
-      })
+      this.loadProfile(params['profile']);
     })
   }
 
@@ -70,6 +73,14 @@ export class ProfileComponent implements OnInit {
       })
       return
     }
+    this.loader.start()
+    this.userService.updateUser(this.data.id, this.form.value).subscribe((resp) => {
+      this.loadProfile(this.data.id)
+      this._snackbar.open('Perfil actualizado con éxito', '', {
+        duration: 3000,
+        panelClass: 'green-snackbar'
+      })
+    })
 
   }
 
@@ -124,5 +135,21 @@ export class ProfileComponent implements OnInit {
     }
     this.data = res;
     this.form.patchValue(res)
+    this.loader.stop();
+  }
+
+  private loadProfile(value : string) {
+    this.loader.start();
+    this.userService.getProfile(value).subscribe((res) => {
+      this.createForm(res);
+    })
+  }
+
+  restorePassword() {
+    this.dialog.open(ChangePasswordComponent, {
+      width : '600px',
+      height : '385px',
+      panelClass : 'my-dialog-container'
+    })
   }
 }
