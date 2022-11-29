@@ -1,25 +1,25 @@
 <!-- <div class="fondo" style="height: 100vh;" [ngStyle]="{'background': 'linear-gradient(90deg, rgba(99,204,8,1) 0%, rgba(44,108,14,1) 100%)'}"> -->
 <!-- <div class="fondo" style="height: 100vh;" [ngStyle]="{'background': 'linear-gradient(90deg, rgba(183,185,181,1) 0%, rgba(230,234,226,1) 78%)'}"> -->
-<div class="fondo" style="height: 100vh;" [ngStyle]="{'background': 'linear-gradient(90deg, rgba(223,249,206,1) 0%, rgba(235,237,232,1) 78%)'}">
 
-<div class="row contenedor col-6">
 
-  <div class="logoeco mt-3 d-flex justify-content-center">
-    <img src="assets/logo_mini.png" height="150px" width="198px" alt="Ecoticket logo">
-  </div>
+<div class="contenedor" [ngStyle]="{'background': 'linear-gradient(90deg, rgba(223,249,206,1) 0%, rgba(235,237,232,1) 78%)'}">
 
-      <form [formGroup]="form" class="mensaje d-flex justify-content-center" >
+<div class="register">
 
-        <section class="row seccion1 col-10">
 
-          <div class="row">
+      <form [formGroup]="form" class="formulario">
+
+        <!-- <div class="itemlogo">
+          <img src="assets/logo_mini.png" height="100px" width="138px" alt="Ecoticket logo">
+        </div>  -->
+
+
+          <div class="item1">
             <mat-icon (click)="this.router.navigate(['/login'])">arrow_back</mat-icon>
-            <div class="mensaje d-flex justify-content-center">
               <h1>Quiero registrarme</h1>
-            </div>
           </div>
 
-          <div class="col-12">
+          <div class="item2">
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Nombre comercial</mat-label>
               <input matInput formControlName="commercialName">
@@ -29,7 +29,7 @@
             </mat-form-field>
           </div>
 
-          <div class="col-md-6">
+          <div class="item3">
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Persona</mat-label>
               <mat-select formControlName="person">
@@ -38,8 +38,7 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
+
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Razón social</mat-label>
               <input matInput formControlName="businessName">
@@ -47,11 +46,7 @@
                 El campo Razón Social es obligatorio
               </mat-error>
             </mat-form-field>
-          </div>
 
-
-
-          <div class="col-md-6">
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Email</mat-label>
               <input matInput formControlName="email">
@@ -63,7 +58,10 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-md-6">
+
+
+          <div class="item4">
+            
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Usuario</mat-label>
               <input matInput formControlName="username">
@@ -71,10 +69,7 @@
                 El campo Username es obligatorio
               </mat-error>
             </mat-form-field>
-          </div>
 
-
-          <div class="col-md-6">
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Contraseña</mat-label>
               <input [type]="showPassword ? 'text' : 'password'" matInput formControlName="password">
@@ -85,8 +80,7 @@
                 El campo Contraseña es obligatorio
               </mat-error>
             </mat-form-field>
-          </div>
-          <div class="col-md-6">
+
             <mat-form-field appearance="outline" class="col-12" >
               <mat-label>Repetir contraseña</mat-label>
               <input type="password" matInput formControlName="confirmPassword">
@@ -98,7 +92,9 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="col-12 mb-3 mt-3">
+
+
+          <div class="item5">
             <div class="container-file col-12">
               <div (click)="fileInputCfdi.click()">
                 <div class="d-flex flex-row gap-2 align-items-center">
@@ -106,24 +102,28 @@
                   {{fileCfdi ? inputCfdi : 'Selecciona un archivo para el cfdi'}}
                 </div>
               </div>
-              <input accept="application/pdf" id="file_cfdi" (change)="onCfdiSelected($event)" type="file" hidden #fileInputCfdi formControlName="cfdi">
+             <input accept="application/pdf" id="file_cfdi" (change)="onCfdiSelected($event)" type="file" hidden #fileInputCfdi formControlName="cfdi">
             </div>
           </div>
 
-          <h3 class="col-md-6 text-success"> Servicios adicionales</h3>
-          <div class="col-md-6">
+
+          <div class="item6">
+            <h3 class="col-md-6 text-success"> Servicios adicionales</h3>
             <mat-slide-toggle (change)="changeAdditionalServices($event)" formControlName="additionalServices" color="primary">Facturación</mat-slide-toggle>
           </div>
-          <section style="margin-top: 10px" *ngIf="showAdditonal" >
+
+
+          <section *ngIf="showAdditonal" class="item7">
             <div class="row">
-              <div class="col-6">
+              <div class="col-6 mt-3">
                 <h3>¿Cuenta con algún servicio de facturación?</h3>
               </div>
-              <div class="col-6" >
+              <div class="col-6 mt-3">
                 <mat-slide-toggle (change)="changeProvider($event)" formControlName="provider" color="primary">Sí</mat-slide-toggle>
               </div>
             </div>
-            <section class="row" *ngIf="showProvider">
+
+            <div class="row" *ngIf="showProvider">
               <div class="col-lg-6">
                 <mat-form-field class="col-12" appearance="outline">
                   <mat-select formControlName="pac" >
@@ -132,20 +132,21 @@
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
-                <div class="col-7" style="align-self: center">
+                <div class="col-12" style="align-self: center">
                   <h5>¿No encuentras tu PAC? <a class="link" (click)="clickRequestPac()">Solicítalo aquí</a> </h5>
                 </div>
               </div>
+
               <div class="col-lg-6">
                 <section class="row">
                   <h3 class="text-black">Proveedor autorizado de certificación</h3>
-                  <div class="col-5">
+                  <div class="col-6">
                     <mat-form-field appearance="outline" class="col-12">
                       <mat-label>Usuario PAC</mat-label>
                       <input matInput formControlName="userPac">
                     </mat-form-field>
                   </div>
-                  <div class="col-5">
+                  <div class="col-6">
                     <mat-form-field appearance="outline" class="col-12">
                       <mat-label>Contraseña PAC</mat-label>
                       <input type="password" matInput formControlName="passwordPac">
@@ -153,25 +154,21 @@
                   </div>
                 </section>
               </div>
-
-
-
-            </section>
-
+              
+            </div>
           </section>
 
 
-        </section>
+          <div class="item8">
+            <button class="btn btn-success btn-md col-12" (click)="clickRegister()">Guardar</button>
+          </div>
 
-        <!-- <div class="row centered-row">
-          <button class="col-6" color="primary" mat-raised-button (click)="clickRegister()">Registrar</button>
-        </div> -->
       </form>
 
 
-      <div class="row d-flex justify-content-center mt-4 mb-3">
-        <button class="btn btn-success btn-md btn-block col-4" (click)="clickRegister()">Guardar</button>
-      </div>
+    
+
+    
 
 </div>
 </div>
