@@ -16,4 +16,8 @@ export class FileService {
     return this.http.post(environment.api + 'file', data);
   }
 
+  sendFileUser(data : FormData) : Observable<any>{
+    return this.http.post(environment.api + 'file-user', data);
+  }
+
 }

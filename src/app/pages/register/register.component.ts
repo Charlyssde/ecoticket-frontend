@@ -11,6 +11,7 @@ import {CustomValidators} from "../../utils/EqualityValidator";
 import {SolicitudPacComponent} from "../../components/solicitud-pac/solicitud-pac.component";
 import { MailService } from 'src/app/services/mail.service';
 import {NgxUiLoaderService} from "ngx-ui-loader";
+import {FileService} from "../../services/file.service";
 
 @Component({
   selector: 'app-register',
@@ -44,6 +45,7 @@ export class RegisterComponent implements OnInit {
     private dialog: MatDialog,
     private authService : AuthService,
     private loader : NgxUiLoaderService,
+    private fileService : FileService,
     private mailService : MailService) {
     this.form = formBuilder.group({
       commercialName : new FormControl('', [Validators.required]),
@@ -54,7 +56,7 @@ export class RegisterComponent implements OnInit {
       password : new FormControl('', [Validators.required]),
       confirmPassword : new FormControl('', [Validators.required]),
       role : new FormControl('owner'),
-      cfdi : new FormControl(null),
+      cfdi : new FormControl('', [Validators.required]),
       additionalServices : new FormControl(false),
       provider : new FormControl(false),
       pac : new FormControl(0),
@@ -114,6 +116,15 @@ export class RegisterComponent implements OnInit {
             this.loader.stop();
             return;
           }
+            let formData : FormData = new FormData();
+            formData.set('file', this.fileCfdi)
+            formData.set('collection', 'cfdi')
+            formData.set('id', resp.id)
+          this.fileService.sendFileUser(formData).subscribe((res) => {
+            this.loader.stop();
+          }, error => {
+            this.loader.stop();
+          })
           this.mailService.sendCondiciones({to : this.form.controls['email'].value}).subscribe(resp => {
             this._snackbar.open('Se ha enviado el correo electrónico con éxito', '', {
               duration : 2500,
