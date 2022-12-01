@@ -70,6 +70,9 @@ export class RegisterComponent implements OnInit {
         return {value : d.key, name : d.display_name}
       })
     }, error => {
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 1000)
       this._snackbar.open('Ocurrió un error al intentar obtener los PACS de facturación. Por favor reintente más tarde', '', {
         duration : 3000
       });
