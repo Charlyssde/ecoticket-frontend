@@ -153,6 +153,7 @@ export class ProfileComponent implements OnInit {
       console.log("idddddddd", this.id)
       this.FileService.download(this.id).subscribe((response) => {
         console.log("url ---------------->",response.signedUrl);
+        window.open(response.signedUrl);
         this.loader.stop();
       })
     })
