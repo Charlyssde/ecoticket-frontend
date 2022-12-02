@@ -52,9 +52,9 @@
     'ocho ocho';
     height: 100%;
     max-height: 100%;
-   
+
  }
- 
+
 
  .formulario > div {
   padding: 5px;
@@ -62,6 +62,18 @@
 
 .item7 > div {
   padding: 5px;
+}
+
+.container-file {
+  border: 1px dashed black;
+  background-color: rgba(162, 162, 162, 0.11);
+  border-radius: 5px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  padding: 10px;
+  cursor: pointer;
 }
 
 
@@ -74,15 +86,15 @@
 //     font-size: 2rem;
 //     color: #1C1C1C;
 //   }
-  
-  
+
+
 //   .mensaje h1 p{
 //     font-family: Helvetica, sans-serif;
 //     font-size: 1rem;
 //     color: #7b7676;
 //     margin-top: 10px;
 //   }
-  
+
 
 // .seccion1{
 //     //border: rgb(94, 92, 92) 1px dotted;
