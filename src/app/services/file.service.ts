@@ -20,4 +20,8 @@ export class FileService {
     return this.http.post(environment.api + 'file-csf', data);
   }
 
+  download(id : string) : Observable<any>{
+    return this.http.get(environment.api + 'download/' + id)
+  }
+
 }

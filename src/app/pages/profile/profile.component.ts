@@ -1,3 +1,4 @@
+import { FileService } from './../../services/file.service';
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {UserService} from "../../services/user.service";
@@ -37,13 +38,14 @@ export class ProfileComponent implements OnInit {
   roles : RolesModel[] = [];
 
   data : any;
-
+  id : any;
   constructor(
     private route : ActivatedRoute,
     private userService : UserService,
     private formBuilder : FormBuilder,
     private loader : NgxUiLoaderService,
     private rolesService : RolesService,
+    private FileService : FileService,
     private _snackbar : MatSnackBar,
     private dialog : MatDialog
   ) {
@@ -142,6 +144,17 @@ export class ProfileComponent implements OnInit {
     this.loader.start();
     this.userService.getProfile(value).subscribe((res) => {
       this.createForm(res);
+    })
+  }
+
+  download(){
+    this.route.queryParams.subscribe((params) => {
+      this.id = params['profile'];
+      console.log("idddddddd", this.id)
+      this.FileService.download(this.id).subscribe((response) => {
+        console.log("url ---------------->",response.signedUrl);
+        this.loader.stop();
+      })
     })
   }
 
