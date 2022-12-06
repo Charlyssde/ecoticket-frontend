@@ -4,43 +4,87 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="container mb-3">
-  <div class="d-flex flex-row ">
-    <div class="col-6 p-3">
+  <div class="d-flex flex-column">
+    <div class="col-12 p-3">
       <div class="d-flex flex-row col-12 justify-content-center">
-        <h3>Datos del cliente</h3>
+        <h3 style="border-bottom: 3px solid green">Datos del cliente</h3>
       </div>
       <div>
         <form [formGroup]="form">
-          <mat-form-field class="col-11" appearance="outline">
+          <mat-form-field class="col-6 p-2" appearance="outline">
             <mat-label>Nombre</mat-label>
             <input matInput formControlName="name"/>
+            <mat-error *ngIf="this.form.controls['name'].errors?.['required']">
+              El campo nombre es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field class="col-11" appearance="outline">
+          <mat-form-field class="col-6 p-2" appearance="outline">
             <mat-label>RFC</mat-label>
             <input matInput formControlName="rfc"/>
+            <mat-error *ngIf="this.form.controls['rfc'].errors?.['required']">
+              El campo RFC es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field class="col-11" appearance="outline">
+          <mat-form-field class="col-6 p-2" appearance="outline">
             <mat-label>CP</mat-label>
             <input matInput formControlName="cp"/>
+            <mat-error *ngIf="this.form.controls['cp'].errors?.['required']">
+              El campo cp es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field class="col-11" appearance="outline">
-            <mat-label>Regimen</mat-label>
-            <input matInput formControlName="regimen"/>
+          <mat-form-field appearance="outline" class="col-6 p-2" >
+            <mat-label>Persona</mat-label>
+            <mat-select (selectionChange)="handleChangePerson($event.value)" formControlName="person">
+              <mat-option *ngFor=" let p of persons" [value]="p.value">
+                {{p.name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
-          <mat-form-field class="col-11" appearance="outline">
+          <mat-form-field appearance="outline" class="col-6 p-2" >
+            <mat-label>Uso CFDI</mat-label>
+            <mat-select (selectionChange)="handleUsoChange($event.value)" formControlName="usoCfdi">
+              <mat-option *ngFor=" let p of usosCfdiFiltered" [value]="p.c_UsoCFDI">
+                {{p.descripcion}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="this.form.controls['usoCfdi'].errors?.['required']">
+              El campo uso cfdi es obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="col-6 p-2" >
+            <mat-label>Regimen Fiscal</mat-label>
+            <mat-select formControlName="regimen">
+              <mat-option *ngFor=" let p of regimenFiscalReceptor" [value]="p.value">
+                {{p.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="this.form.controls['regimen'].errors?.['required']">
+              El campo regimen fiscal es obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-6 p-2" appearance="outline">
             <mat-label>Correo</mat-label>
             <input matInput formControlName="email"/>
+            <mat-error *ngIf="this.form.controls['email'].errors?.['required']">
+              El campo email es obligatorio
+            </mat-error>
           </mat-form-field>
-          <mat-form-field class="col-11" appearance="outline">
+          <mat-form-field class="col-6 p-2" appearance="outline">
             <mat-label>Confirmar correo</mat-label>
             <input matInput formControlName="confirmEmail"/>
+            <mat-error *ngIf="this.form.controls['confirmEmail'].errors?.['required']">
+              El campo email es obligatorio
+            </mat-error>
+            <mat-error *ngIf="this.form.controls['confirmEmail'].errors?.['confirmedValidator']">
+              Los correos no coinciden
+            </mat-error>
           </mat-form-field>
         </form>
       </div>
     </div>
-    <div class="col-6 p-3">
+    <div class="col-12 p-3">
       <div class="d-flex flex-row col-12 justify-content-center">
-        <h3>Ticket</h3>
+        <h3 style="border-bottom: 3px solid green">Ticket</h3>
       </div>
       <div>
         <mat-form-field class="col-12" appearance="outline">
@@ -109,7 +153,7 @@
       </div>
     </div>
   </div>
-  <div class="mt-2 mb-2" *ngIf="showData">
+  <div class="mt-2 mb-4" *ngIf="showData">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="tienda">
         <th class="text-center" mat-header-cell *matHeaderCellDef>Tienda</th>
@@ -151,7 +195,6 @@
           </div>
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="dataColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: dataColumns"></tr>
     </table>

@@ -4,6 +4,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CustomValidators} from "../../utils/EqualityValidator";
+import {OptionModel} from "../../models/option-model";
+import {MatRadioChange} from "@angular/material/radio";
+import {VoucherModel} from "../../models/voucher-model";
+import {VoucherService} from "../../services/voucher.service";
 
 
 @Component({
@@ -88,6 +92,16 @@ export class FacturadorComponent implements OnInit {
     }
   }
 
+  persons : OptionModel[] = [
+    {value : 1, name : 'PERSONA FÍSICA'},
+    {value : 2, name : 'PERSONA MORAL'}
+  ]
+  usoEj : VoucherModel = {id : '0', c_UsoCFDI : '0', descripcion : 'Seleccione una opción', fechaFin:'', fechaInicio : '', persona : 'Ambas', regimenFiscalR:''}
+  usosCfdi : VoucherModel[] = [this.usoEj];
+  usosCfdiFiltered : VoucherModel[] = [this.usoEj];
+  regimenEj = {value : 0, name : 'Seleccione una opción'};
+  regimenFiscalReceptor : OptionModel[] = [this.regimenEj];
+
   ticketColumns = ['producto', 'vu', 'cantidad', 'importe']
   dataColumns = ['tienda', 'fecha', 'monto', 'pdf', 'xml']
 
@@ -103,26 +117,35 @@ export class FacturadorComponent implements OnInit {
   constructor(
     private facturacionService : FacturacionService,
     private formBuilder : FormBuilder,
-    private _snackbar : MatSnackBar
+    private _snackbar : MatSnackBar,
+    private voucherService : VoucherService
   ) {
     this.form = this.formBuilder.group({
       name : new FormControl('', [Validators.required]),
       rfc : new FormControl('', [Validators.required]),
       cp : new FormControl('', [Validators.required]),
-      regimen : new FormControl('', [Validators.required]),
+      person : new FormControl(1, [Validators.required]),
+      usoCfdi : new FormControl('0', [Validators.required]),
+      regimen : new FormControl(0, [Validators.required]),
       email : new FormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
       confirmEmail : new FormControl('', [Validators.required])
     }, {validator : CustomValidators.MatchValidator('email', 'confirmEmail')})
   }
 
   ngOnInit(): void {
+
+    this.voucherService.getAllVouchers().subscribe(resp => {
+      this.usosCfdi.push(...resp);
+      this.usosCfdiFiltered = [this.usoEj, ...resp.filter((r : any) => r.persona === 'Física' || r.persona === 'Ambas')];
+    })
+
   }
 
   handleClickFacturar() {
     /*this.facturacionService.sendTicket(this.ticketNumber).subscribe((data) => {
     }, error => {});*/
 
-    if(!this.form.valid){
+    if(!this.form.valid || this.form.value.usoCfdi === '0' || this.form.value.regimen === 0){
       this._snackbar.open('Por favor complete los datos del cliente', '', {
         duration : 2000
       });
@@ -148,4 +171,32 @@ export class FacturadorComponent implements OnInit {
     }
     this.showTicket = true;
   }
+
+  handleChangePerson(value: number) {
+    if(value === 1){
+      this.usosCfdiFiltered = [...this.usosCfdi.filter(u => u.persona === 'Ambas' || u.persona === 'Física')]
+      this.form.controls['usoCfdi'].setValue('0')
+      this.restartRegimen();
+    }else{
+      this.usosCfdiFiltered = [...this.usosCfdi.filter(u => u.persona === 'Ambas' || u.persona === 'Moral')]
+      this.form.controls['usoCfdi'].setValue('0')
+      this.restartRegimen();
+    }
+  }
+
+  handleUsoChange(value: any) {
+    let found = this.usosCfdiFiltered.find(u => u.c_UsoCFDI === value);
+    if(found){
+      this.restartRegimen();
+      this.regimenFiscalReceptor = [this.regimenEj, ...found.regimenFiscalR.split(',').map(r => {
+        return {value : Number.parseInt(r), name : r};
+      })]
+    }
+  }
+
+  restartRegimen(){
+    this.regimenFiscalReceptor = [this.regimenEj];
+    this.form.controls['regimen'].setValue(0)
+  }
+
 }
