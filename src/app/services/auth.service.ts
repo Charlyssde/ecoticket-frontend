@@ -53,7 +53,7 @@ export class AuthService {
             console.log("Error->", error)
           });
       }),
-      catchError(async (err) => err.error)
+      catchError(async (err) => err.error.error ? err.error : {error : 'Error desconocido'})
     )
   }
 
