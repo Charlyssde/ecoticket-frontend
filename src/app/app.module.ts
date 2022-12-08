@@ -45,6 +45,7 @@ import { ModalTokenComponent } from './components/modal-token/modal-token.compon
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { PermissionsRuleDirective } from './directive/permissions-rule.directive';
 import { FacturadorComponent } from './pages/facturador/facturador.component';
+import {MatRadioModule} from "@angular/material/radio";
 
 
 const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
@@ -114,6 +115,7 @@ const ngxuiloaderconfiguration : NgxUiLoaderConfig = {
         MatMenuModule,
         NgxUiLoaderModule.forRoot(ngxuiloaderconfiguration),
         NgxUiLoaderModule,
+        MatRadioModule,
     ],
   providers: [
     {
