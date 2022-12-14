@@ -39,6 +39,8 @@ export class UserComponent implements OnInit {
   };
 
   data1 : StoreModel = {
+    cer_name: "",
+    key_name: "",
     cer: "",
     csdPassword: "",
     generatedInvoices: 0,

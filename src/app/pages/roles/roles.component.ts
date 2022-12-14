@@ -20,6 +20,8 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
 export class RolesComponent implements OnInit {
 
   data : StoreModel = {
+    cer_name: "",
+    key_name: "",
     cer: "",
     csdPassword: "",
     generatedInvoices: 0,

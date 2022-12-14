@@ -18,6 +18,8 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
 export class AdduserComponent implements OnInit {
 
   data1 : StoreModel = {
+    cer_name: "",
+    key_name: "",
     cer: "",
     csdPassword: "",
     generatedInvoices: 0,

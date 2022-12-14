@@ -21,6 +21,8 @@ export class CsdComponent implements OnInit {
   fileKey! : File;
 
   data : StoreModel = {
+    cer_name: "",
+    key_name: "",
     cer: "",
     csdPassword: "",
     generatedInvoices: 0,
@@ -61,8 +63,8 @@ export class CsdComponent implements OnInit {
           nss : this.data.nss,
           csdPassword : this.data.csdPassword
         })
-        this.inputCer = this.data.cer;
-        this.inputKey = this.data.key;
+        this.inputCer = this.data.cer_name;
+        this.inputKey = this.data.key_name;
         this.loader.stop();
       }, error => {
         this.loader.stop();
@@ -92,6 +94,7 @@ export class CsdComponent implements OnInit {
         let formData : FormData = new FormData();
         formData.set('file', this.fileKey)
         formData.set('collection', 'key')
+        formData.set('route', 'stores')
         formData.set('owner', this.id)
         this.fileService.sendFile(formData).subscribe((res) => {
           this._snackbar.open('Se ha guardado con éxito el archivo .key','',{
@@ -107,9 +110,10 @@ export class CsdComponent implements OnInit {
         let formData : FormData = new FormData();
         formData.set('file', this.fileCer)
         formData.set('collection', 'cer')
+        formData.set('route', 'stores')
         formData.set('owner', this.id)
         this.fileService.sendFile(formData).subscribe((res) => {
-          this._snackbar.open('Se ha guardado con éxito el archivo .key','',{
+          this._snackbar.open('Se ha guardado con éxito el archivo .cer','',{
             duration : 2000
           })
           this.loader.stop();
