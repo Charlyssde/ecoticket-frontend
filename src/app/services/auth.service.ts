@@ -73,7 +73,7 @@ export class AuthService {
             sessionStorage.setItem('sucursal', result.claims.sucursal);
             this._usuario = {
               username: result.claims.username,
-              token: response.claims.token,
+              token: result.claims.token,
               permissions: result.claims.role
             }
 

@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
             formData.set('file', this.fileCfdi)
             formData.set('collection', 'cfdi')
             formData.set('route', 'users')
-            formData.set('id', resp.id)
+            formData.set('owner', resp.id)
           this.fileService.sendFileUser(formData).subscribe((res) => {
             this.loader.stop();
           }, error => {
